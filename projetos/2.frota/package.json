@@ -1,18 +1,23 @@
 {
-  "name": "2.frota",
+  "name": "trabalho-mateus",
   "version": "1.0.0",
-  "description": "",
+  "description": "PAra Trabalho",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "node ./dist/app.js"
+    "test": "npm init"
   },
-  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Felipo102/Tutores-Trabalhos.git"
+  },
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Felipo102/Tutores-Trabalhos/issues"
+  },
+  "homepage": "https://github.com/Felipo102/Tutores-Trabalhos#readme",
   "devDependencies": {
-    "@types/node": "^24.2.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }
 }
