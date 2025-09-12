@@ -4,3 +4,10 @@ export enum StatusUsuario {
   BLOQUEADO,
   PENDENTE,
 }
+
+export enum NivelAcesso {
+  BASICO,
+  MODERADOR,
+  ADMINISTRADOR,
+  SUPER_ADMIN,
+}

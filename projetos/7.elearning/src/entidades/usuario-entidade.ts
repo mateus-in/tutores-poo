@@ -5,10 +5,10 @@ export abstract class Usuario {
   private _tentativasLogin: number = 0;
 
   constructor(
-    private _id: string,
+    protected _id: string,
     public nome: string,
     public email: string,
-    private _senha: string,
+    protected _senha: string,
     public dataRegistro: Date,
     public status: StatusUsuario,
   ) {}
