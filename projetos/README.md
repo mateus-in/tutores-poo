@@ -2,7 +2,7 @@
 
 ## 📚 Sobre esta Coleção
 
-Esta coleção contém **6 projetos práticos** desenvolvidos especificamente para o ensino de **Programação Orientada a Objetos** em cursos técnicos. Cada projeto aplica os conceitos fundamentais da POO de forma progressiva e contextualizada, utilizando **TypeScript** como linguagem de implementação.
+Esta coleção contém **7 projetos práticos** desenvolvidos especificamente para o ensino de **Programação Orientada a Objetos** em cursos técnicos. Cada projeto aplica os conceitos fundamentais da POO de forma progressiva e contextualizada, utilizando **TypeScript** como linguagem de implementação.
 
 ---
 
@@ -83,3 +83,13 @@ Esta coleção contém **6 projetos práticos** desenvolvidos especificamente pa
 - **Polimorfismo Duplo:** Cálculo de fretes E descontos específicos
 - **Destaque:** Sistema mais completo com herança em duas hierarquias
 - **Ideal para:** Consolidação avançada de todos os conceitos
+
+---
+
+### 🎓 [7. Sistema de E-learning](7.elearning/)
+**Setor:** Educação | **Foco:** Cursos e Usuários
+
+- **Herança Dupla:** `Usuario` (Aluno/Instrutor/Admin) + `Conteudo` (Vídeo/Texto/Quiz/Atividade)
+- **Polimorfismo Complexo:** Cálculo de progresso e tempo estimado específicos por tipo
+- **Destaque:** Sistema completo com múltiplas hierarquias e relacionamentos complexos
+- **Ideal para:** Demonstração avançada de todos os conceitos de POO em sistema real
