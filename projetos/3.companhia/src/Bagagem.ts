@@ -1,10 +1,19 @@
-import { TipoBagagem } from "./enums/TipoBagagem";
+import { TipoBagagem } from './enums/TipoBagagem';
 export class Bagagem {
-    constructor(
-        public id: string,
-        public tipo: TipoBagagem,
-        public peso: number,
-        public dimensoes: string, // 50 cm x 20 cm
+  constructor(
+    public id: string,
+    public tipo: TipoBagagem,
+    public peso: number,
+    public dimensoes: string, // 50 cm x 20 cm
+  ) {}
 
-    ) {}
+  calcularTaxaExcesso(): number {
+    return 1;
+  }
+  validarDimensoes(): boolean {
+    return true;
+  }
+  validarPeso(): boolean {
+    return true;
+  }
 }
