@@ -1,13 +1,15 @@
 import { Bagagem } from './Bagagem';
 import { Passageiro } from './Passageiro';
 
-export class PassageiroComum extends Passageiro {
+export class PassageiroVip extends Passageiro {
   constructor(
     public id: string,
     public nome: string,
     public documento: string,
     public email: string,
     public telefone: string,
+    public idade: number,
+    public responsavel: string,
   ) {
     super(id, nome, documento, email, telefone);
   }
