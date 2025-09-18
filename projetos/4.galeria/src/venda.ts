@@ -1,12 +1,16 @@
-class Venda {
+import { ObraDeArte } from './obraDeArte';
+import { Cliente } from "./cliente";
+import { FormaPagamento } from './interfaces/FormaPagamento';
+
+export class Venda {
     constructor(
         id: string,
-        obra: obraDeArte,
-        cliente: Cliente,
-        dataVenda: Date,
-        valorVenda: number
-        comissaoGaleria: number,
-        formaPagamento: FormaPagamento,
+        public obra: ObraDeArte,
+        public cliente: Cliente,
+        public dataVenda: Date,
+        public valorVenda: number,
+        public comissaoGaleria: number,
+        public formaPagamento: FormaPagamento,
     ) { }
 
     calcularComissao(): number {
@@ -26,5 +30,4 @@ class Venda {
         console.log(`Data da venda: ${this.dataVenda.toLocaleDateString()}`);
     }
 
-    const new
-
+}

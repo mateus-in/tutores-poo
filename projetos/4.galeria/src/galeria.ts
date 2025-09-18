@@ -11,15 +11,5 @@ export class Galeria {
     exposicoes: Exposicao[],
     vendas: Venda[],
     clientes: Cliente[],
-  ){}
+  ) { }
 }
-
-adicionarObra(obra: ObraDeArte): void
-    if(!this.artistas.some(artista=>artista.id === isStringOneByteRepresentation.artista.id)){
-    this.artistas.push(isStringOneByteRepresentation.artista);
-
-    organizarExposição(exposição:Exposição):boolean{
-
-    }
-}
- 

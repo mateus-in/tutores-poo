@@ -1,4 +1,5 @@
 import { ObraDeArte } from './obraDeArte';
+import { StatusObra } from './enums/StatusObra';
 
 export class Exposicao {
   obras: ObraDeArte[] = [];
@@ -9,7 +10,7 @@ export class Exposicao {
     public curador: string,
     public dataInicio: Date,
     public dataFim: Date,
-  ) {}
+  ) { }
 
   adicionarObra(obra: ObraDeArte): boolean {
     if (this.obras.some((o) => o.id === obra.id)) {

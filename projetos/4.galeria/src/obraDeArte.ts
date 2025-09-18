@@ -1,4 +1,4 @@
-import { StatusObra } from './enums/enumstatusobra';
+import { StatusObra } from './enums/StatusObra';
 import { artista } from './artista';
 import { dimensao } from './dimensao';
 
