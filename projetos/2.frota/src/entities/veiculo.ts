@@ -8,11 +8,11 @@ import { StatusVeiculos } from './enum';
 // Exemplo: quilometragem não pode ser negativa, status deve ser um dos valores do enum StatusVeiculos
 export abstract class Veiculos {
   constructor(
-    placa: string,
-    modelo: string,
-    quilometragem: number,
-    status: StatusVeiculos,
-    custoManutenção: number,
+    public placa: string,
+    public modelo: string,
+    public quilometragem: number,
+    public status: StatusVeiculos,
+    public custoManutenção: number,
   ) {}
 
   abstract CalcularCustoPorKM(): number;
