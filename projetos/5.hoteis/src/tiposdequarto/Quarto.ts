@@ -1,12 +1,12 @@
 import { StatusQuarto } from '../Enums/enumStatusQuarto';
 
 export abstract class Quarto {
-  protected numero: string;
-  protected andar: number;
-  protected capacidade: number;
-  protected precoDiaria: number;
-  protected status: StatusQuarto;
-  protected comodidades: string[];
+  public numero: string;
+  public andar: number;
+  public capacidade: number;
+  public precoDiaria: number;
+  public status: StatusQuarto;
+  public comodidades: string[];
 
   constructor(
     numero: string,
