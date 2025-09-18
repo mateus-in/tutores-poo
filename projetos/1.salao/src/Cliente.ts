@@ -2,10 +2,10 @@ import { FichaTecnica } from './FichaTecnica';
 
 export class Cliente {
   constructor(
-    public_id: string,
-    public_nome: string,
-    public_telefone: string,
-    public_email: string,
-    public_fichaTecnica: FichaTecnica,
+    public id: string,
+    public nome: string,
+    public telefone: string,
+    public email: string,
+    public fichaTecnica: FichaTecnica,
   ) {}
 }

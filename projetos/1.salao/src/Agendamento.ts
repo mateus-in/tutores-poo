@@ -6,12 +6,12 @@ import { StatusPagamento } from './StatusPagamento';
 
 export class Agendamento {
   constructor(
-    public_id: string,
-    public_cliente: Cliente,
-    public_profissional: Profissional,
-    public_servicos: Servico[],
-    public_dataHora: Date,
-    public_status: StatusPagamento,
-    public_pagamento: MetodoPagamento,
+    public id: string,
+    public cliente: Cliente,
+    public profissional: Profissional,
+    public servicos: Servico[],
+    public dataHora: Date,
+    public status: StatusPagamento,
+    public pagamento: MetodoPagamento,
   ) {}
 }

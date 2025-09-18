@@ -2,17 +2,28 @@ import { Agendamento } from './Agendamento';
 
 export class Profissional {
   constructor(
-    public_id: string,
-    public_nome: string,
-    public_especialidades: string[],
-    public_agenda: Agendamento,
+   
+    public id: string,
+    public nome: string,
+    public especialidades: string[],
+    public agenda: Agendamento,
   ) {}
 
   temEspecialidades(servico: string): boolean {
-    return false;
+    if (this.especialidades.length === 0 || !this.especialidades.includes(servico)){
+       return false;      
+    }
+
+    return this.especialidades.includes(servico);
   }
 
-  estaDisponivel(dada: Date, duracao: number): boolean {
-    return false;
+  estaDisponivel(data: Date, duracao: number): boolean {
+    if (duracao <= 0 || this.agenda.dataHora === data || this.agenda.dataHora.getTime() + duracao*60000 > data.getTime()){
+       return false;      
+    }
+     return true;
   }
 }
+
+
+

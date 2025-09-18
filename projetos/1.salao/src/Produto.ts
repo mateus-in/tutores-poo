@@ -7,14 +7,23 @@ export class Produto {
   ) {}
 
   temEstoqueSuficiente(quantidade: number): boolean {
-    return this.quantidadeEstoque < 1;
+    if (quantidade === 0){
+       return false;      
+    }
+    return this.quantidadeEstoque >= quantidade;
   }
 
   consumir(quantidade: number): boolean {
+    if (quantidade > this.quantidadeEstoque || quantidade <= 0){
+       return false;      
+    }
     return this.quantidadeEstoque >= quantidade;
   }
 
   precisaReposicao(): boolean {
-    return this.quantidadeEstoque < this.estoqueMinimo;
+    if (this.quantidadeEstoque <= this.estoqueMinimo){
+        return true;
+  }
+    return false;
   }
 }
