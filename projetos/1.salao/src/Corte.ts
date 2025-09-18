@@ -5,7 +5,7 @@ export class Corte implements Servico {
     public nome: string,
     public precoBase: number,
     public duracaoMinutos: number,
-    public tipoProduto: string,
+    //
   ) {
     //
   }
