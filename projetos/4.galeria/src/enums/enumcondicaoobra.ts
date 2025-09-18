@@ -5,3 +5,4 @@ export enum CondicaoObra {
     REGULAR,
     PRECISA_RESTAURACAO,
 }
+
