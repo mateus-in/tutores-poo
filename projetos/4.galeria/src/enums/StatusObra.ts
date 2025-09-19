@@ -4,5 +4,6 @@ export enum StatusObra {
   VENDIDA,
   EMPRESTADA,
   EM_RESTAURACAO,
+  Disponivel,
 }
 

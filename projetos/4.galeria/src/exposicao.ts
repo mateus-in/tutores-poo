@@ -1,5 +1,8 @@
 import { ObraDeArte } from './obraDeArte';
 import { StatusObra } from './enums/StatusObra';
+import { ObraIndisponivelError } from './excessoes/Obra/ObraIndisponivelError';
+import { RemoverObraError } from './excessoes/Obra/RemoverObraError';
+import { AdicionarObraError } from './excessoes/Obra/AdicionarObraError';
 
 export class Exposicao {
   constructor(
@@ -14,15 +17,13 @@ export class Exposicao {
 
   adicionarObra(obra: ObraDeArte): boolean {
     if (this.obras.some((o) => o.id === obra.id)) {
-      console.log('A obra já está na exposição.');
-      return false;
+      throw new AdicionarObraError('Não é possível adicionar a obra: obra indisponível para venda ou exibição.');
+
     }
 
     if (obra.status === StatusObra.VENDIDA || obra.status === StatusObra.EM_RESTAURACAO) {
-      console.log(
-        'A obra não pode ser adicionada à exposição (já foi vendida ou está em restauração).',
-      );
-      return false;
+      throw new ObraIndisponivelError('Não é possível remover a obra: obra não encontrada na exposição.');
+
     }
 
     obra.alterarStatus(StatusObra.EM_EXPOSICAO);
@@ -32,8 +33,8 @@ export class Exposicao {
   removerObra(obraId: string): boolean {
     const index = this.obras.findIndex((obra) => obra.id === obraId);
     if (index === -1) {
-      console.log('A obra não foi encontrada na exposição.');
-      return false;
+      throw new RemoverObraError('Não é possível remover a obra: obra não encontrada na exposição.');
+      ;
     }
 
     this.obras.splice(index, 1);
