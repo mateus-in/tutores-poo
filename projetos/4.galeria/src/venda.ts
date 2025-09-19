@@ -4,7 +4,7 @@ import { FormaPagamento } from './interfaces/FormaPagamento';
 
 export class Venda {
     constructor(
-        id: string,
+        public id: string,
         public obra: ObraDeArte,
         public cliente: Cliente,
         public dataVenda: Date,

@@ -2,14 +2,14 @@ import { ObraDeArte } from './obraDeArte';
 import { StatusObra } from './enums/StatusObra';
 
 export class Exposicao {
-  obras: ObraDeArte[] = [];
-  visitantes: number = 0;
   constructor(
     public id: string,
     public nome: string,
     public curador: string,
     public dataInicio: Date,
     public dataFim: Date,
+    public obras: ObraDeArte[] = [],
+    visitantes: number = 0,
   ) { }
 
   adicionarObra(obra: ObraDeArte): boolean {

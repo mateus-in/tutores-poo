@@ -1,6 +1,6 @@
 import { StatusObra } from './enums/StatusObra';
 import { artista } from './artista';
-import { dimensao } from './dimensao';
+import { dimensao } from './interfaces/dimensao';
 
 export abstract class ObraDeArte {
   constructor(
