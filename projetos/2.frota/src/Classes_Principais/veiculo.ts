@@ -1,11 +1,5 @@
 import { StatusVeiculos } from './enum';
 
-// Define a classe abstrata Veiculos
-// Ela deve conter os atributos: placa, modelo, quilometragem, status e custoManutenção
-// Deve ter um método abstrato CalcularCustoPorKM() que retorna o custo por quilômetro
-// Deve ter métodos para atualizar a quilometragem e alterar o status do veículo
-// Os métodos devem lançar erros se os valores forem inválidos
-// Exemplo: quilometragem não pode ser negativa, status deve ser um dos valores do enum StatusVeiculos
 export abstract class Veiculos {
   constructor(
     public placa: string,
@@ -13,6 +7,7 @@ export abstract class Veiculos {
     public quilometragem: number,
     public status: StatusVeiculos,
     public custoManutenção: number,
+    public categoriaCNHObrigatoria?: string, // Exemplo: 'B', 'C', 'D', etc.
   ) {}
 
   abstract CalcularCustoPorKM(): number;

@@ -1,3 +1,6 @@
+import { Viagem } from './viagem';
+import { Veiculos } from './veiculo';
+
 export class Motorista {
   constructor(
     public nome: string,
@@ -6,7 +9,7 @@ export class Motorista {
     public dataVencimentoCnh: Date,
     private historicoViagens: string[] = [], // Array para armazenar o histórico de viagens
   ) {}
-  podeConduzir(veiculo: Veiculo): boolean {
+  podeConduzir(veiculo: Veiculos): boolean {
     // Verifica se o motorista tem a categoria CNH necessária para conduzir o veículo
     if (
       veiculo.categoriaCNHObrigatoria &&
@@ -23,9 +26,11 @@ export class Motorista {
   }
   adicionarViagem(viagem: Viagem): void {
     // Adiciona uma viagem ao histórico de viagens do motorista
-    if (viagem && viagem.destino && viagem.data) {
+    if (viagem && viagem.destino && viagem.dataInicio && viagem.dataFim) {
       this.historicoViagens.push(
-        `Viagem para ${viagem.destino} em ${viagem.data.toLocaleDateString()}`,
+        `Viagem para ${
+          viagem.destino
+        } de ${viagem.dataInicio.toLocaleDateString()} até ${viagem.dataFim.toLocaleDateString()}`,
       );
     } else {
       throw new Error('Dados da viagem inválidos.');
