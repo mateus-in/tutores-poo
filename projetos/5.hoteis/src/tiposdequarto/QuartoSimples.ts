@@ -3,7 +3,7 @@ import { Quarto } from './Quarto';
 
 export class QuartoSimples extends Quarto {
   constructor(
-    numero: string,
+    numero: number,
     andar: number,
     capacidade: number,
     precoDiaria: number,
@@ -15,21 +15,15 @@ export class QuartoSimples extends Quarto {
     return this.precoDiaria * dias;
   }
 
-  public alterarStatus(novoStatus: StatusQuarto): void {
-    throw new Error('Method not implemented.');
-  }
   public estaDisponivel(): boolean {
-    throw new Error('Method not implemented.');
+    if (this.status === StatusQuarto.DISPONIVEL) {
+      return true;
+    } else {
+      return false;
+    }
   }
   public obterDescricao(): string {
-    return this.comodidades.length > 0
-      ? `Quarto Simples ${this.numero} no andar ${this.andar}, capacidade para ${
-          this.capacidade
-        } pessoas, com comodidades: ${this.comodidades.join(
-          ', ',
-        )}. Preço da diária: R$${this.precoDiaria.toFixed(2)}`
-      : `Quarto Simples ${this.numero} no andar ${this.andar}, capacidade para ${
-          this.capacidade
-        } pessoas. Preço da diária: R$${this.precoDiaria.toFixed(2)}`;
+    const baseDescricao = super.obterDescricao();
+    return `${baseDescricao} Tipo: Simples.`;
   }
 }

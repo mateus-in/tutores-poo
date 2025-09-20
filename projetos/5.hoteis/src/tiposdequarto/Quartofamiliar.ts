@@ -7,7 +7,7 @@ export class QuartoFamiliar extends Quarto {
   private _taxaBerco: number = 30;
 
   constructor(
-    numero: string,
+    numero: number,
     andar: number,
     capacidade: number,
     precoDiaria: number,
@@ -33,13 +33,18 @@ export class QuartoFamiliar extends Quarto {
     const custoBercos = this._bercos * this._taxaBerco * dias;
     return base + custoBercos;
   }
-  public alterarStatus(novoStatus: StatusQuarto): void {
-    throw new Error('Method not implemented.');
-  }
+
   public estaDisponivel(): boolean {
-    throw new Error('Method not implemented.');
+    if (this.status === StatusQuarto.DISPONIVEL) {
+      return true;
+    } else {
+      return false;
+    }
   }
   public obterDescricao(): string {
-    throw new Error('Method not implemented.');
+    const basedescricao = super.obterDescricao();
+    const descricaoBercos = `${this.bercos} berço(s)`;
+    const descricaoKitchenette = this.kitchenette ? 'com kitchenette' : 'sem kitchenette';
+    return `${basedescricao} Tipo: Familiar — ${descricaoBercos}, ${descricaoKitchenette}.`;
   }
 }
