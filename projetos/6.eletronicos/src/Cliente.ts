@@ -1,5 +1,5 @@
-import { Endereco } from "./Endereco.ts";
-import { Pedido } from "./Pedido.ts"
+import { Endereco } from "./Endereco";
+import { Pedido } from "./Pedido"
 
 abstract class Cliente {
 
