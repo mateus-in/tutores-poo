@@ -1,26 +1,26 @@
-export class ItemPedido{
-    produto: Produto;
-    quantidade: number;
-    precoUnitario: number;
-    desconto: number;
+import { Produto } from './Produto';
 
-    constructor (
+export class ItemPedido {
+  produto: Produto;
+  quantidade: number;
+  precoUnitario: number;
+  desconto: number;
 
-        produto: Produto,
-        quantidade: number,
-        precoUnitario: number,
-        desconto: number,
+  constructor(produto: Produto, quantidade: number, precoUnitario: number, desconto: number) {
+    this.produto = produto;
+    this.quantidade = quantidade;
+    this.precoUnitario = precoUnitario;
+    this.desconto = desconto;
+  }
 
-    ){
+  calcularSubtotal(): number {
+    const ItemPedido_subtotal = this.precoUnitario * this.quantidade;
+    return ItemPedido_subtotal;
+  }
 
-        this.produto = produto;
-        this.quantidade = quantidade;
-        this.precoUnitario = precoUnitario;
-        this.desconto = desconto;
+  aplicarDesconto(percentual: number): void {
+    if (percentual > 0 && percentual <= 100) {
+      this.desconto = (this.precoUnitario * percentual) / 100;
     }
-
-    calcularSubtotal(): number {}
-
-    aplicarDesconto(percentual: number): void {} 
-    
+  }
 }

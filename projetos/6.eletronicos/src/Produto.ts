@@ -25,4 +25,7 @@ export abstract class Produto {
   aplicarDesconto(percentual: number): number {
     return this.preco - (this.preco * percentual / 100);
   }
+
+
+
 }

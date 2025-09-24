@@ -1,4 +1,4 @@
-import { Pedido } from "./Pedido.ts";
+import { Pedido } from "./Pedido";
 
 
 export class Vendedor {

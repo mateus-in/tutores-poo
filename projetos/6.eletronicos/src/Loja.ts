@@ -1,4 +1,8 @@
-import { Produto } from "./Produto.ts";
+import { Produto } from "./Produto";
+import { Cliente } from "./Cliente";
+import { Pedido } from "./Pedido";
+import { Vendedor } from "./Vendedor";
+import { RelatorioVendas } from "./RelatorioVendas";
 
 
 export class Loja {
@@ -26,11 +30,19 @@ export class Loja {
 
     }
     
-    adicionarProduto(produto: Produto): void {}
+    adicionarProduto(produto: Produto): void {
+        this.produtos.push(produto);
+    }
     
-    buscarProdutos(termo: string): Produto[] {}
+    buscarProdutos(termo: string): Produto[] {
+        return this.produtos.filter(produto => 
+            produto.nome.toLowerCase().includes(termo.toLowerCase())
+        );
+    }
 
-    processarPedido(pedido: Pedido): boolean {}
+    processarPedido(pedido: Pedido): boolean {
+        
+    }
 
     consultarEstoque(produtoId: string): number {}
 

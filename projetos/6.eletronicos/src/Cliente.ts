@@ -1,7 +1,7 @@
 import { Endereco } from "./Endereco";
 import { Pedido } from "./Pedido"
 
-abstract class Cliente {
+export abstract class Cliente {
 
   constructor(
     public id: string,

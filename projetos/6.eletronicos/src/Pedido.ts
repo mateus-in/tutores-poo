@@ -1,4 +1,6 @@
-import { Cliente } from "./Cliente.ts";
+import { Cliente } from "./Cliente";
+import { ItemPedido } from "./ItemPedido";
+import { StatusPedido, FormaPagamento } from "./Enum";
 
 export class Pedido{
     id:string;

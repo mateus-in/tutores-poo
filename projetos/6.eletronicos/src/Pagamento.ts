@@ -1,3 +1,6 @@
+import { Pedido } from "./Pedido";
+import { FormaPagamento, StatusPagamento } from "./Enum";
+
 export class Pagamento{
     id: string;
     pedido: Pedido[];

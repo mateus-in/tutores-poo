@@ -1,1 +1,2 @@
-console.log('6.eletronicos');
+console.log('6.eletronicos\n');
+console.clear();
