@@ -1,31 +1,19 @@
 export class Endereco {
-  rua: string;
-  numero: string;
-  bairro: string;
-  cidade: string;
-  estado: string;
-  cep: string;
-
   constructor(
-    rua: string,
-    numero: string,
-    bairro: string,
-    cidade: string,
-    estado: string,
-    cep: string,
-  ) {
-    this.rua = rua;
-    this.numero = numero;
-    this.bairro = bairro;
-    this.cidade = cidade;
-    this.estado = estado;
-    this.cep = cep;
-  }
+    public rua: string,
+    public numero: string,
+    public bairro: string,
+    public cidade: string,
+    public estado: string,
+    public cep: string,
+  ) {}
 
+  // Retorna endereço completo como string
   obterEnderecoCompleto(): string {
     return `${this.rua}, ${this.numero} - ${this.bairro}, ${this.cidade} - ${this.estado}, CEP: ${this.cep}`;
   }
 
+  // Calcula distância fictícia para o CEP destino
   calcularDistancia(cepDestino: string): number {
     return Math.random() * 100;
   }

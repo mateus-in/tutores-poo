@@ -1,13 +1,14 @@
 import { Pedido } from './Pedido';
 import { FormaPagamento, StatusPagamento } from './Enum';
 
+// Classe Pagamento: representa o pagamento de um pedido
 export class Pagamento {
-  id: string;
-  pedido: Pedido[];
-  valor: number;
-  formaPagamento: FormaPagamento;
-  status: StatusPagamento;
-  dataProcessamento: Date;
+  id: string; // ID do pagamento
+  pedido: Pedido[]; // Pedido(s) relacionados
+  valor: number; // Valor do pagamento
+  formaPagamento: FormaPagamento; // Tipo de pagamento
+  status: StatusPagamento; // Status do pagamento
+  dataProcessamento: Date; // Data de processamento
 
   constructor(
     id: string,
@@ -25,20 +26,36 @@ export class Pagamento {
     this.dataProcessamento = dataProcessamento;
   }
 
+  // Processa o pagamento
   processar(): boolean {
     if (this.status === StatusPagamento.APROVADO) {
       console.log('Pagamento já aprovado.');
       return true;
     }
-    if (this.formaPagamento === FormaPagamento.CARTAO) {
+
+    // Exemplo simplificado para cartão
+    if (
+      this.formaPagamento === FormaPagamento.CARTAO_CREDITO ||
+      this.formaPagamento === FormaPagamento.CARTAO_DEBITO
+    ) {
       if (!this.validarCartao()) {
         this.status = StatusPagamento.RECUSADO;
         return false;
       }
     }
+
+    this.status = StatusPagamento.APROVADO;
+    console.log('Pagamento aprovado!');
+    return true;
   }
 
-  calcularParcelas(numeroParcelas: number): number {}
+  // Calcula valor das parcelas
+  calcularParcelas(numeroParcelas: number): number {
+    return this.valor / numeroParcelas;
+  }
 
-  validarCartao(): boolean {}
+  // Validação simples de cartão
+  validarCartao(): boolean {
+    return true; 
+  }
 }

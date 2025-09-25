@@ -1,24 +1,25 @@
 import { Cliente } from './Cliente';
 import { ItemPedido } from './ItemPedido';
 import { StatusPedido, FormaPagamento } from './Enum';
-import { Produto } from './Produto';
+
+// Classe que representa um pedido na loja
 
 export class Pedido {
-  id: string;
-  cliente: Cliente;
-  itens: ItemPedido[];
-  datapedido: Date;
-  Status: StatusPedido;
-  valorTotal: number;
-  valorFrete: number;
-  formaPagamento: FormaPagamento;
+  id: string; // ID do pedido
+  cliente: Cliente; // Cliente que realizou o pedido
+  itens: ItemPedido[]; // Lista de itens do pedido
+  dataPedido: Date; // Data do pedido
+  status: StatusPedido; // Status atual do pedido
+  valorTotal: number; // Valor total do pedido
+  valorFrete: number; // Valor do frete
+  formaPagamento: FormaPagamento; // Forma de pagamento
 
   constructor(
     id: string,
     cliente: Cliente,
     itens: ItemPedido[],
-    datapedido: Date,
-    Status: StatusPedido,
+    dataPedido: Date,
+    status: StatusPedido,
     valorTotal: number,
     valorFrete: number,
     formaPagamento: FormaPagamento,
@@ -26,30 +27,34 @@ export class Pedido {
     this.id = id;
     this.cliente = cliente;
     this.itens = itens;
-    this.datapedido = datapedido;
-    this.Status = Status;
+    this.dataPedido = dataPedido;
+    this.status = status;
     this.valorTotal = valorTotal;
     this.valorFrete = valorFrete;
     this.formaPagamento = formaPagamento;
   }
 
+  // Adiciona um item ao pedido
+
   adicionarItem(item: ItemPedido): void {
-    this.itens.push(item); // adiciona o pedido
+    this.itens.push(item);
     console.log('Item adicionado!');
   }
 
+  // Remove um item do pedido pelo ID do produto
+
   removerItem(produtoId: string): boolean {
     const i = this.itens.findIndex((i) => i.produto.id === produtoId);
-
     if (i !== -1) {
-      this.itens.splice(i, 1); // remove 1 item no índice encontrado
+      this.itens.splice(i, 1);
       console.log('Item removido');
-      return true; // conseguiu remover
+      return true;
     }
-
     console.log('Item não encontrado!');
-    return false; // não achou
+    return false;
   }
+
+  // Calcula o subtotal do pedido considerando quantidade e desconto
 
   calcularSubtotal(): number {
     return this.itens.reduce((total, item) => {
@@ -58,9 +63,13 @@ export class Pedido {
     }, 0);
   }
 
+  // Calcula o valor total do pedido somando o frete
+
   calcularValorTotal(): number {
     return this.calcularSubtotal() + this.valorFrete;
   }
+
+  // Confirma o pedido, atualiza status e valor total
 
   confirmarPedido(): boolean {
     if (this.itens.length === 0) {
@@ -69,7 +78,7 @@ export class Pedido {
     }
 
     this.valorTotal = this.calcularValorTotal();
-    this.Status = StatusPedido.CONFIRMADO;
+    this.status = StatusPedido.CONFIRMADO;
     console.log('Pedido confirmado!');
     return true;
   }
