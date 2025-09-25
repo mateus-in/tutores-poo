@@ -6,7 +6,7 @@ export class Promocao {
     public percentualDesconto: number,
     public dataInicio: Date,
     public dataFim: Date,
-    public servicosAlicaveis: string[],
+    public servicosAplicaveis: string[], //correçao da ortografia de "Apicaveis" para "Aplicaveis"
   ) {}
   estaAtiva(): boolean {
     const hoje = new Date();
@@ -20,7 +20,7 @@ export class Promocao {
     if (!this.estaAtiva()) {
       return false;
     }
-    return this.servicosAlicaveis.includes(servico.nome);
+    return this.servicosAplicaveis.includes(servico.nome);
   }
 
   calcularDesconto(valor: number): number {
