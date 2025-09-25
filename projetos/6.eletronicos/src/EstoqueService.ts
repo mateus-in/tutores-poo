@@ -1,5 +1,6 @@
 import { Produto } from './Produto';
 import { ItemPedido } from './ItemPedido';
+import { EstoqueInsuficienteException } from './EstoqueInsuficienteExpection';
 
 export class EstoqueService {
   produtos: Produto[];
@@ -13,7 +14,6 @@ export class EstoqueService {
   verificarEstoqueBaixo(): Produto[] {
     return this.produtos.filter((produto) => {
       const minimo = this.estoqueMinimo.get(produto.id) || 0;
-      console.log('Estoque baixo para o produto:', produto.nome);12
       return produto.quantidadeEstoque < minimo;
     });
   }
@@ -31,7 +31,9 @@ export class EstoqueService {
     for (const item of itens) {
       const produto = this.produtos.find((p) => p.id === item.produto.id);
       if (!produto || produto.quantidadeEstoque < item.quantidade) {
-        return false;
+        throw new EstoqueInsuficienteException(
+          'Estoque insuficiente para o produto ${item.produto.nome}.',
+        );
       }
     }
     for (const item of itens) {

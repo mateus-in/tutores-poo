@@ -4,7 +4,7 @@ export enum CategoriaProduto {
   TABLET,
   ACESSORIO,
   GAMER,
-  CASA_INTELIGENTE
+  CASA_INTELIGENTE,
 }
 
 export enum StatusPedido {
@@ -13,7 +13,7 @@ export enum StatusPedido {
   PAGAMENTO_APROVADO,
   ENVIADO,
   ENTREGUE,
-  CANCELADO
+  CANCELADO,
 }
 
 export enum FormaPagamento {
@@ -22,12 +22,12 @@ export enum FormaPagamento {
   CARTAO_DEBITO,
   PIX,
   BOLETO,
-  PARCELADO
+  PARCELADO,
 }
 
 export enum StatusPagamento {
   PENDENTE,
   APROVADO,
   RECUSADO,
-  CANCELADO
+  CANCELADO,
 }

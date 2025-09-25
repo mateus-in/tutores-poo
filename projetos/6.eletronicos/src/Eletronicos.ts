@@ -1,7 +1,7 @@
-import { Produto } from "./Produto";
-import { CategoriaProduto } from "./Enum";
+import { Produto } from './Produto';
+import { CategoriaProduto } from './Enum';
 
-class Smartphone extends Produto {
+export class Smartphone extends Produto {
   constructor(
     id: string,
     nome: string,
@@ -11,17 +11,26 @@ class Smartphone extends Produto {
     peso: number,
     garantiaMeses: number,
     public sistemaOperacional: string,
-    public armazenamento: number
+    public armazenamento: number,
   ) {
-    super(id, nome, marca, preco, quantidadeEstoque, CategoriaProduto.SMARTPHONE, peso, garantiaMeses);
+    super(
+      id,
+      nome,
+      marca,
+      preco,
+      quantidadeEstoque,
+      CategoriaProduto.SMARTPHONE,
+      peso,
+      garantiaMeses,
+    );
   }
 
   calcularFrete(cep: string): number {
-    return 15; 
+    return 15;
   }
 }
 
-class Notebook extends Produto {
+export class Notebook extends Produto {
   constructor(
     id: string,
     nome: string,
@@ -31,17 +40,27 @@ class Notebook extends Produto {
     peso: number,
     garantiaMeses: number,
     public processador: string,
-    public memoria: number
+    public memoria: number,
   ) {
-    super(id, nome, marca, preco, quantidadeEstoque, CategoriaProduto.NOTEBOOK, peso, garantiaMeses);
+    super(
+      id,
+      nome,
+      marca,
+      preco,
+      quantidadeEstoque,
+      CategoriaProduto.NOTEBOOK,
+      peso,
+      garantiaMeses,
+    );
   }
 
   calcularFrete(cep: string): number {
-    return this.peso * 2; 
+    const valor = this.peso * 2;
+    return valor < 10 ? 10 : valor; // mínimo 10 reais
   }
 }
 
-class Acessorio extends Produto {
+export class Acessorio extends Produto {
   constructor(
     id: string,
     nome: string,
@@ -50,12 +69,21 @@ class Acessorio extends Produto {
     quantidadeEstoque: number,
     peso: number,
     garantiaMeses: number,
-    public compatibilidade: string[]
+    public compatibilidade: string[],
   ) {
-    super(id, nome, marca, preco, quantidadeEstoque, CategoriaProduto.ACESSORIO, peso, garantiaMeses);
+    super(
+      id,
+      nome,
+      marca,
+      preco,
+      quantidadeEstoque,
+      CategoriaProduto.ACESSORIO,
+      peso,
+      garantiaMeses,
+    );
   }
 
   calcularFrete(cep: string): number {
-    return this.preco > 200 ? 0 : 10; 
+    return this.preco > 200 ? 0 : 10;
   }
 }

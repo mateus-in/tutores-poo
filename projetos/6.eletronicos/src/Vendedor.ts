@@ -1,39 +1,29 @@
-import { Pedido } from "./Pedido";
-
+import { Pedido } from './Pedido';
 
 export class Vendedor {
+  id: string;
+  nome: string;
+  comissaoPercentual: number;
+  metaMensal: number;
+  vendasMes: Pedido[];
 
-    id: string;
-    nome: string;
-    comissaoPercentual: number;
-    metaMensal: number;
-    vendasMes: Pedido[];
-
- constructor (
-
-        id: string,
-        nome: string,
-        comissaoPercentual: number,
-        metaMensal: number,
-        vendasMes: Pedido[],
-    
-    ){
-
-        this.id = id;
-        this.nome = nome;
-        this.comissaoPercentual = comissaoPercentual;
-        this.metaMensal = metaMensal;
-        this.vendasMes = vendasMes;
-
+  constructor(
+    id: string,
+    nome: string,
+    comissaoPercentual: number,
+    metaMensal: number,
+    vendasMes: Pedido[],
+  ) {
+    this.id = id;
+    this.nome = nome;
+    this.comissaoPercentual = comissaoPercentual;
+    this.metaMensal = metaMensal;
+    this.vendasMes = vendasMes;
   }
 
   calcularComissao(): number {}
 
-    adicionarVenda(pedido: Pedido): {} 
+  adicionarVenda(pedido: Pedido): {};
 
-    atingiuMeta(): boolean {}
-    
-
-
-
+  atingiuMeta(): boolean {}
 }

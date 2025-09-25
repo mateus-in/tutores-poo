@@ -1,4 +1,4 @@
-import { CategoriaProduto } from "./Enum";
+import { CategoriaProduto } from './Enum';
 
 export abstract class Produto {
   constructor(
@@ -9,7 +9,7 @@ export abstract class Produto {
     public quantidadeEstoque: number,
     public categoria: CategoriaProduto,
     public peso: number,
-    public garantiaMeses: number
+    public garantiaMeses: number,
   ) {}
 
   abstract calcularFrete(cep: string): number;
@@ -19,13 +19,11 @@ export abstract class Produto {
   }
 
   atualizarEstoque(quantidade: number): void {
-    this.quantidadeEstoque += quantidade;
+    this.quantidadeEstoque = Math.max(0, this.quantidadeEstoque + quantidade);
   }
 
   aplicarDesconto(percentual: number): number {
-    return this.preco - (this.preco * percentual / 100);
+    percentual = Math.min(percentual, 100);
+    return this.preco - (this.preco * percentual) / 100;
   }
-
-
-
 }

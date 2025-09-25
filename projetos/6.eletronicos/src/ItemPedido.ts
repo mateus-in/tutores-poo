@@ -1,10 +1,10 @@
 import { Produto } from './Produto';
 
 export class ItemPedido {
-  produto: Produto;
-  quantidade: number;
-  precoUnitario: number;
-  desconto: number;
+  public produto: Produto;
+  public quantidade: number;
+  public precoUnitario: number;
+  public desconto: number;
 
   constructor(produto: Produto, quantidade: number, precoUnitario: number, desconto: number) {
     this.produto = produto;
