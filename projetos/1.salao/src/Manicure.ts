@@ -2,22 +2,34 @@ import { Servico } from './Servico';
 import { Promocao } from './Promocao';
 export class Manicure implements Servico {
   constructor(
-    public promocao: Promocao,
     public nome: string,
     public precoBase: number,
     public duracaoMinutos: number,
+    public promocao?: Promocao,
     //retirado tipoProduto: string
+    public pedicure?: number
   ) {}
 
-  calcularPrecoFinal(): number {
-    const estaAtiva = this.promocao.estaAtiva();
-    const aplicavelAoServico = this.promocao.aplicavelAoServico(this);
-    const percentualDesconto = this.promocao.percentualDesconto;
-    const desconto = this.promocao.calcularDesconto(this.precoBase);
-
-    if (!estaAtiva && !aplicavelAoServico) {
-      return this.precoBase;
+  calcularAdicionalPedicure(): number {
+    if (this.pedicure) {
+      return this.precoBase + this.pedicure;
     }
-    return this.precoBase - desconto;
+    return this.precoBase;
+  }
+
+calcularPrecoFinal(): number {
+    let preco = this.calcularAdicionalPedicure();
+
+    if (this.promocao) {
+      const estaAtiva = this.promocao.estaAtiva();
+      const aplicavel = this.promocao.aplicavelAoServico(this);
+
+      if (estaAtiva && aplicavel) {
+        const desconto = this.promocao.calcularDesconto(preco);
+        preco -= desconto;
+      }
+    }
+
+    return preco;
   }
 }

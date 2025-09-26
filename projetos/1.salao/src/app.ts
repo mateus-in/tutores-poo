@@ -17,5 +17,5 @@ console.log(hidratacao.calcularPrecoFinal());
 const corte = new Corte(promocao, 'corte1', 80, 45);
 console.log(corte.calcularPrecoFinal());
 
-const manicure = new Manicure(promocao, 'manicure1', 50, 30);
+const manicure = new Manicure('manicure1', 50, 30, promocao, 20);
 console.log(manicure.calcularPrecoFinal());

@@ -73,14 +73,14 @@ Equipe: Carine, Gabriel Fernatti, Julimar, Maria Gabriely, Wendel
       
   Regras de Negócios Serviços e Preços:
  - [X] Promoções ativas são aplicadas automaticamente no cálculo final
- - [ ] Cada tipo de serviço calcula seu preço de forma específica:
+ - [X] Cada tipo de serviço calcula seu preço de forma específica:
    
    ❗ Manicure: Preço fixo + adicional se for pedicure
  ---
  *Hidratação (implementa Servico)*  
 - [X] Classe
 - [X] Atributo específico tipoProduto
-- [ ] Promoções ativas são aplicadas automaticamente no cálculo final
+- [X] Promoções ativas são aplicadas automaticamente no cálculo final
 
   Regras de Negócios Serviços e Preços:
  - [X] Cada tipo de serviço calcula seu preço de forma específica:
