@@ -11,7 +11,7 @@ const promocao = new Promocao(
     ['hidratacao1'], // Serviços aplicáveis à promoção
     );
 
-const hidratacao = new Hidratacao('hidratacao1', 100, 60, 'premium', promocao);
+const hidratacao = new Hidratacao('hidratacao1', 100, 60, 'premium');
 console.log(hidratacao.calcularPrecoFinal());
 
 const corte = new Corte(promocao, 'corte1', 80, 45);

@@ -7,7 +7,7 @@ export class Hidratacao implements Servico {
     public precoBase: number,
     public duracaoMinutos: number,
     public tipoProduto: string,
-    public promocao: Promocao, // Adiciona a promoção como um atributo opcional
+    public promocao?: Promocao, // Adiciona a promoção como um atributo opcional
   ) {
     //
   }
