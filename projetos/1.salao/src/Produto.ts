@@ -1,5 +1,6 @@
 export class Produto {
   constructor(
+    public id: string,
     public nome: string,
     public quantidadeEstoque: number,
     public precoUnitario: number,
@@ -7,23 +8,23 @@ export class Produto {
   ) {}
 
   temEstoqueSuficiente(quantidade: number): boolean {
-    if (quantidade === 0){
-       return false;      
+    if (quantidade === 0) {
+      return false;
     }
     return this.quantidadeEstoque >= quantidade;
   }
 
   consumir(quantidade: number): boolean {
-    if (quantidade > this.quantidadeEstoque || quantidade <= 0){
-       return false;      
+    if (quantidade > this.quantidadeEstoque || quantidade <= 0) {
+      return false;
     }
     return this.quantidadeEstoque >= quantidade;
   }
 
   precisaReposicao(): boolean {
-    if (this.quantidadeEstoque <= this.estoqueMinimo){
-        return true;
-  }
+    if (this.quantidadeEstoque <= this.estoqueMinimo) {
+      return true;
+    }
     return false;
   }
 }

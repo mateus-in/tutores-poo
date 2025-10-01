@@ -14,4 +14,25 @@ export class Agendamento {
     public status: StatusPagamento,
     public pagamento: MetodoPagamento,
   ) {}
+
+  calcularDuracaoTotal(): number {
+    if (this.servicos.length === 0) {
+      return 0;
+    }
+    return this.servicos.reduce((total, servico) => total + servico.duracaoMinutos, 0);
+  }
+
+  calcularValorTotal(): number {
+    if (this.servicos.length === 0) {
+      return 0;
+    }
+    return this.servicos.reduce((total, servico) => total + servico.calcularPrecoFinal(), 0);
+  }
+
+  adicionarServico(servico: Servico): void {
+    if (this.servicos.includes(servico)) {
+      throw new Error('Este serviço já foi adicionado ao agendamento.');
+    }
+    this.servicos.push(servico);
+  }
 }
