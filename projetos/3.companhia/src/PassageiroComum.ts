@@ -1,5 +1,6 @@
 import { Bagagem } from './Bagagem';
 import { Passageiro } from './Passageiro';
+import { TipoBagagem } from './enums/TipoBagagem';
 
 export class PassageiroComum extends Passageiro {
   constructor(
@@ -13,9 +14,29 @@ export class PassageiroComum extends Passageiro {
   }
 
   calcularPrecoPassagem(precoBase: number): number {
-    return 1;
+    return precoBase;
   }
   validarBagagem(bagagens: Bagagem[]): boolean {
-    return true;
-  }
+        const contarBagagens = (tipo: TipoBagagem) => 
+            bagagens.filter(b => b.tipo === tipo).length;
+          
+        const contagemMao = contarBagagens(TipoBagagem.BAGAGEM_MAO);
+        const contagemDespachada = contarBagagens(TipoBagagem.BAGAGEM_DESPACHADA);
+        const contagemEspecial = contarBagagens(TipoBagagem.BAGAGEM_ESPECIAL);
+
+              if (contagemMao>1) {
+                return false; 
+              } else if (contagemDespachada >1) {
+                return false;
+              }else if (contagemEspecial >0){
+                return  false ;
+              } else {
+                return true;
+              }
+                
+          
+  } 
+
 }
+
+
