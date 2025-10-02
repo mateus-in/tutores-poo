@@ -1,3 +1,4 @@
+import { threadId } from 'worker_threads';
 import { TipoBagagem } from './enums/TipoBagagem';
 export class Bagagem {
   constructor(
@@ -9,12 +10,39 @@ export class Bagagem {
   ) {}
 
   calcularTaxaExcesso(): number {
-    return 1;
+    let limitePeso = 0;
+    if (this.tipo===TipoBagagem.BAGAGEM_MAO) {
+      limitePeso = 10;
+    } else if (this.tipo===TipoBagagem.BAGAGEM_DESPACHADA){
+      limitePeso =23;
+    }  else (this.tipo===TipoBagagem.BAGAGEM_ESPECIAL)
+    {
+      limitePeso = 32;
+    }
+
+    if (this.peso>limitePeso) {
+      return(this.peso - limitePeso) * 20;
+    }else{
+      return 0;
+    } 
   }
   validarDimensoes(): boolean {
-    return true;
+      const regex = /^\d+cmx\d+cm$/;
+    return regex.test(this.dimensoes);
   }
   validarPeso(): boolean {
-    return true;
+    let limitePeso = 0;
+      if (this.tipo === TipoBagagem.BAGAGEM_MAO) {
+      limitePeso = 10;
+    } else if (this.tipo === TipoBagagem.BAGAGEM_DESPACHADA) {
+      limitePeso = 23;
+    } else if (this.tipo === TipoBagagem.BAGAGEM_ESPECIAL) {
+      limitePeso = 32;
+    }
+
+    return this.peso <= limitePeso;
   }
 }
+
+  
+
