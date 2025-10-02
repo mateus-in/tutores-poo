@@ -5,7 +5,7 @@ export class Manicure implements Servico {
     public nome: string,
     public precoBase: number,
     public duracaoMinutos: number,
-    public tipoProduto: string,
+    //
   ) {
     //
   }

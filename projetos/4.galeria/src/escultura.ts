@@ -1,5 +1,6 @@
 import { ObraDeArte } from './obraDeArte';
 import { artista } from './artista';
+
 import { dimensao } from './interfaces/dimensao';
 import { StatusObra } from './enums/StatusObra';
 

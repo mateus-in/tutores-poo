@@ -1,3 +1,4 @@
+
 import { StatusObra } from './enums/StatusObra';
 import { artista } from './artista';
 import { dimensao } from './interfaces/dimensao';
@@ -12,6 +13,7 @@ export abstract class ObraDeArte {
     public status: StatusObra,
     public valorEstimado: number,
   ) { }
+  ) {}
 
   abstract calcularValorMercado(): number;
 
