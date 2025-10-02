@@ -1,6 +1,5 @@
 export enum TipoBagagem {
-    DISPONIVEL,
-    EM_VOO,
-    MANUTENCAO,
-    INATIVA,
+    BAGAGEM_DESPACHADA,
+    BAGAGEM_ESPECIAL,
+    BAGAGEM_MAO,
 }
