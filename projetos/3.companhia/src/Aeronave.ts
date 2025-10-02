@@ -12,7 +12,7 @@ export class Aeronave {
     return this.status === StatusAeronave.DISPONIVEL;
     }
 
-  alternarStatus(novoStatus: StatusAeronave): void {
+  alterarStatus(novoStatus: StatusAeronave): void {
     this.status = novoStatus;
   }
 }
