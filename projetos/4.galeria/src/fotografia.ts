@@ -1,7 +1,8 @@
 import { ObraDeArte } from './obraDeArte';
 import { artista } from './artista';
-import { dimensao } from './dimensao';
-import { StatusObra } from './enum';
+
+import { dimensao } from './interfaces/dimensao';
+import { StatusObra } from './enums/StatusObra';
 
 export class Fotografia extends ObraDeArte {
   constructor(
