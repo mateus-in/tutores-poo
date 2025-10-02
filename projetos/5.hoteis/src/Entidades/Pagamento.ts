@@ -2,7 +2,7 @@ import { Reserva } from './Reserva';
 import { FormaPagamento } from '../Enums/enumFormaPagamento';
 import { StatusPagamento } from '../Enums/enumStatusPagamento';
 
-class Pagamento {
+export class Pagamento {
   id: string;
   reserva: Reserva;
   valor: number;

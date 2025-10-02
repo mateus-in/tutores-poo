@@ -1,4 +1,4 @@
-class Promocao {
+export class Promocao {
   nome: string;
   percentualDesconto: number;
   dataInicio: Date;

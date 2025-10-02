@@ -1,6 +1,6 @@
 import { Reserva } from './Reserva';
 import { Quarto } from '../tiposdequarto/Quarto';
-class RelatorioHotel {
+export class RelatorioHotel {
   dataInicio: Date;
   dataFim: Date;
   reservasAnalisadas: Reserva[];
