@@ -1,7 +1,5 @@
 import { Endereco } from './Endereco';
 import { Pedido } from './Pedido';
-
-// Classe abstrata Cliente
 export abstract class Cliente {
   historicoPedidos: Pedido[] = [];
 
@@ -16,15 +14,12 @@ export abstract class Cliente {
     if (historicoPedidos) this.historicoPedidos = historicoPedidos;
   }
 
-  // Cada tipo de cliente calcula desconto de forma diferente
   abstract calcularDesconto(valorTotal: number): number;
 
-  // Adiciona pedido ao histórico
   adicionarPedido(pedido: Pedido): void {
     this.historicoPedidos.push(pedido);
   }
 
-  // Calcula total gasto pelo cliente
   calcularTotalGasto(): number {
     return this.historicoPedidos.reduce((total, pedido) => total + pedido.valorTotal, 0);
   }
@@ -45,7 +40,7 @@ export class ClienteVIP extends Cliente {
     email: string,
     telefone: string,
     endereco: Endereco,
-    public dataVencimento: Date,
+    dataVencimento: Date,
     public pontosAcumulados: number,
     historicoPedidos?: Pedido[],
   ) {
@@ -56,7 +51,6 @@ export class ClienteVIP extends Cliente {
     return valorTotal * 0.9;
   }
 
-  // Incrementa pontos
   adicionarPontos(): void {
     this.pontosAcumulados += 1;
   }

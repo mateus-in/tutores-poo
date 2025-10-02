@@ -1,12 +1,10 @@
 import { Pedido } from './Pedido';
 import { Produto } from './Produto';
 
-// Classe para gerar relatórios de vendas
-
 export class RelatorioVendas {
-  dataInicio: Date; // Data inicial do relatório
-  dataFim: Date; // Data final do relatório
-  pedidosAnalisados: Pedido[]; // Lista de pedidos analisados
+  dataInicio: Date;
+  dataFim: Date;
+  pedidosAnalisados: Pedido[];
 
   constructor(dataInicio: Date, dataFim: Date, pedidosAnalisados: Pedido[]) {
     this.dataInicio = dataInicio;
@@ -14,13 +12,9 @@ export class RelatorioVendas {
     this.pedidosAnalisados = pedidosAnalisados;
   }
 
-  // Calcula o faturamento total do período
-
   calcularFaturamentoTotal(): number {
     return this.pedidosAnalisados.reduce((total, pedido) => total + pedido.valorTotal, 0);
   }
-
-  // Retorna os produtos mais vendidos
 
   obterProdutosMaisVendidos(): Produto[] {
     const contagem: Map<string, { produto: Produto; quantidade: number }> = new Map();
@@ -35,20 +29,15 @@ export class RelatorioVendas {
       });
     });
 
-    // Ordena por quantidade vendida e retorna produtos
     return Array.from(contagem.values())
       .sort((a, b) => b.quantidade - a.quantidade)
       .map((v) => v.produto);
   }
 
-  // Calcula ticket médio por pedido
-
   calcularTicketMedio(): number {
     if (this.pedidosAnalisados.length === 0) return 0;
     return this.calcularFaturamentoTotal() / this.pedidosAnalisados.length;
   }
-
-  // Analisar performance de vendedores (retorna objeto simples)
 
   analisarPerformanceVendedores(): { vendedor: string; totalVendas: number }[] {
     return this.pedidosAnalisados.map((pedido) => ({
