@@ -1,1 +1,6 @@
-export enum StatusAssento {}
+export enum StatusAssento { 
+  DISPONIVEL,
+  RESERVADO,
+  OCUPADO,
+  BLOQUEADO, 
+}
