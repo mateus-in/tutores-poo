@@ -5,6 +5,7 @@ export class Bagagem {
     public tipo: TipoBagagem,
     public peso: number,
     public dimensoes: string, // 50 cm x 20 cm
+    public precoExtra:number,
   ) {}
 
   calcularTaxaExcesso(): number {

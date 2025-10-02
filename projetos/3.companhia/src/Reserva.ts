@@ -12,11 +12,17 @@ export class Reserva {
     public bagagens: Bagagem[],
     public dataReserva: Date,
     public precoTotal: number,
+    public precoExtra:number,
   ) {}
 
   calcularPrecoTotal(): number {
-    return 1;
-  }
+    let precobagagens=0;
+    for(const bagagem of this.bagagens){
+    precobagagens+-bagagem.precoExtra;
+    }
+    this.precoTotal=this.voo.precoBase+precobagagens;
+    return this.precoTotal
+  } 
   adicionarBagagem(bagagem: Bagagem): boolean {
     return true;
   }
