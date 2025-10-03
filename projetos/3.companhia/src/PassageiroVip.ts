@@ -1,6 +1,7 @@
 import { Bagagem } from './Bagagem';
 import { Passageiro } from './Passageiro';
 import { TipoBagagem } from './enums/TipoBagagem';
+import { BeneficiosEnum } from './enums/BeneficiosEnum';
 
 export class PassageiroVip extends Passageiro {
   constructor(
@@ -15,10 +16,21 @@ export class PassageiroVip extends Passageiro {
   }
 
   listarbeneficios(): string[]{
-    return ["Acessso a sala VIP",
-             "Desconto especial",
-            "Maior quantidade de bagagens despachada", ];
-  }
+      return [
+        BeneficiosEnum.SALA_VIP,
+        BeneficiosEnum.DESCONTO_ESPECIAL,
+        BeneficiosEnum.BAGAGEM_EXTRA
+    ];
+}
+
+listarexclusividadessalavip():string[]{
+  return[
+    "Buffet de alta gastronomia e bebidas",
+    "Wi-fi de alta velocidade exclusivo",
+    "Chuveiros e produtos de higiene pessoal",
+  ]
+}
+
 
   calcularPrecoPassagem(precoBase: number): number {
         return precoBase * 0.8;

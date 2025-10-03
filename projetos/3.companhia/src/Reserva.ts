@@ -45,5 +45,8 @@ export class Reserva {
     if (this.status !== StatusReserva.CANCELADA) {
         this.status = StatusReserva.CANCELADA;
     } 
-  }
+  }realizarCheckIn(): void {
+    this.status = StatusReserva.CONFIRMADA;
+}
+  
 }
