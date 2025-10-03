@@ -1,6 +1,7 @@
 import { StatusAssento } from './enums/StatusAssento';
 import { Aeronave } from './Aeronave';
 import { Reserva } from './Reserva';
+import { StatusReserva } from './enums/StatusReserva';
 
 export class Voo {
   constructor(
@@ -16,15 +17,30 @@ export class Voo {
   ) {}
 
   verificarDisponibilidade(): number {
-    return 1;
+     let DISPONIVEL = 0;
+        this.assentos.forEach(status => {
+            if (status === StatusAssento.DISPONIVEL)DISPONIVEL++;
+        });
+        return DISPONIVEL;  
   }
   reservarAssento(numeroAssento: string): boolean {
-    return true;
+     const status = this.assentos.get(numeroAssento) ;
+        if (status=== StatusAssento.DISPONIVEL) {
+            this.assentos.set(numeroAssento, StatusAssento.RESERVADO);
+            return true;
+        }
+        return false;
   }
   calcularReceitaTotal(): number {
-    return 1;
+      return this.reservas
+            .filter(r => r.status === StatusReserva.CONFIRMADA)
+            .reduce((total, r) => total + r.precoTotal, 0);
   }
   listarAssentosDisponiveis(): string[] {
-    return [];
+    const DISPONIVEL: string[] = [];
+        this.assentos.forEach((status, numero) => {
+            if (status === StatusAssento.DISPONIVEL) DISPONIVEL.push(numero);
+        });
+        return DISPONIVEL
   }
 }
