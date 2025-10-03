@@ -1,11 +1,11 @@
 import { Pedido } from './Pedido';
 
 export class Vendedor {
-  id: string;
-  nome: string;
-  comissaoPercentual: number;
-  metaMensal: number;
-  vendasMes: Pedido[] = [];
+  private id: string;
+  public nome: string;
+  private comissaoPercentual: number;
+  private metaMensal: number;
+  private vendasMes: Pedido[] = [];
 
   constructor(
     id: string,

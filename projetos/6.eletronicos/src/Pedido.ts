@@ -3,14 +3,14 @@ import { ItemPedido } from './ItemPedido';
 import { StatusPedido, FormaPagamento } from './Enum';
 
 export class Pedido {
-  id: string;
-  cliente: Cliente;
-  itens: ItemPedido[];
-  dataPedido: Date;
-  status: StatusPedido;
-  valorTotal: number;
-  valorFrete: number;
-  formaPagamento: FormaPagamento;
+  public id: string;
+  public cliente: Cliente;
+  public itens: ItemPedido[];
+  public dataPedido: Date;
+  public status: StatusPedido;
+  public valorTotal: number;
+  public valorFrete: number;
+  public formaPagamento: FormaPagamento;
 
   constructor(
     id: string,

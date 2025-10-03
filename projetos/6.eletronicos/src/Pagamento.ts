@@ -2,12 +2,12 @@ import { Pedido } from './Pedido';
 import { FormaPagamento, StatusPagamento } from './Enum';
 
 export class Pagamento {
-  id: string;
-  pedido: Pedido[];
-  valor: number;
-  formaPagamento: FormaPagamento;
-  status: StatusPagamento;
-  dataProcessamento: Date;
+  public id: string;
+  public pedido: Pedido[];
+  public valor: number;
+  public formaPagamento: FormaPagamento;
+  public status: StatusPagamento;
+  public dataProcessamento: Date;
 
   constructor(
     id: string,

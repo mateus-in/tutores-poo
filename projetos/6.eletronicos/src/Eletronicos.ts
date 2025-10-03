@@ -3,13 +3,13 @@ import { CategoriaProduto } from './Enum';
 
 export class Smartphone extends Produto {
   constructor(
-    id: string,
-    nome: string,
-    marca: string,
-    preco: number,
-    quantidadeEstoque: number,
-    peso: number,
-    garantiaMeses: number,
+    public id: string,
+    public nome: string,
+    public marca: string,
+    public preco: number,
+    public quantidadeEstoque: number,
+    public peso: number,
+    public garantiaMeses: number,
     public sistemaOperacional: string,
     public armazenamento: number,
   ) {

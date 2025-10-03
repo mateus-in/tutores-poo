@@ -6,11 +6,11 @@ import { RelatorioVendas } from './RelatorioVendas';
 
 
 export class Loja {
-  nome: string;
-  produtos: Produto[];
-  clientes: Cliente[];
-  pedidos: Pedido[];
-  vendedores: Vendedor[];
+  public nome: string;
+  public produtos: Produto[];
+  public clientes: Cliente[];
+  public pedidos: Pedido[];
+  public vendedores: Vendedor[];
 
   constructor(
     nome: string,
