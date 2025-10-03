@@ -1,25 +1,37 @@
-import { Veiculos } from './veiculo';
-import { StatusVeiculos } from './enum';
+import { Veiculo } from './veiculo';
+import { StatusVeiculos, CategoriaCNH } from './enum';
 
-export class Caminhao extends Veiculos {
+export class Caminhao extends Veiculo {
+  static getQuilometragem(): number {
+    throw new Error('Method not implemented.');
+  }
+  //IMPLEMENTAR TIPO CNH CATEGORIA C, D, E
+
+  private capacidadeCarga: number; // em toneladas
+
   constructor(
-    public placa: string,
-    public modelo: string,
-    public quilometragem: number,
-    public status: StatusVeiculos,
-    public custoManutenção: number,
-    public capacidadeCarga: number, // Atributo adicional
+    placa: string,
+    modelo: string,
+    ano: number,
+    quilometragem: number = 0,
+    custoManutencao: number = 0,
+    capacidadeCarga: number = 10,
   ) {
-    super(placa, modelo, quilometragem, status, custoManutenção);
+    super(placa, modelo, ano, quilometragem, custoManutencao);
+    this.capacidadeCarga = capacidadeCarga;
   }
 
-  CalcularCustoPorKM(): number {
-    // Verifica se a quilometragem é zero para evitar divisão por zero
-    if (this.quilometragem === 0) {
-      throw new Error('Quilometragem não pode ser zero para calcular o custo por KM.');
-    }
+  getCategoriaMinimaCNH(): CategoriaCNH {
+    return CategoriaCNH.C;
+  }
 
-    // Calcula e retorna o custo por quilômetro
-    return this.custoManutenção / this.quilometragem;
+  getQuilometragem(): number {
+    return this.quilometragem;
+  }
+
+  calcularCustoPorKm(): number {
+    const base = 1.0;
+    const adicionalPorTonelada = 0.2;
+    return base + this.capacidadeCarga * adicionalPorTonelada;
   }
 }

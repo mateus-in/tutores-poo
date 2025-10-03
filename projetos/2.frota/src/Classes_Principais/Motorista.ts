@@ -1,23 +1,20 @@
 import { Viagem } from './viagem';
-import { Veiculos } from './veiculo';
+import { Veiculo } from './veiculo';
+import { CategoriaCNH } from './enum';
 
 export class Motorista {
   constructor(
     public nome: string,
     public cpf: string,
-    public categoriaCNH: string, // Exemplo: 'B', 'C', 'D', etc.
+    public categoriaCNH: CategoriaCNH, // Exemplo: 'B', 'C', 'D', etc.
     public dataVencimentoCnh: Date,
     private historicoViagens: string[] = [], // Array para armazenar o histórico de viagens
   ) {}
-  podeConduzir(veiculo: Veiculos): boolean {
-    // Verifica se o motorista tem a categoria CNH necessária para conduzir o veículo
-    if (
-      veiculo.categoriaCNHObrigatoria &&
-      !this.categoriaCNH.includes(veiculo.categoriaCNHObrigatoria)
-    ) {
-      return false; // Motorista não pode conduzir o veículo
-    }
-    return true; // Motorista pode conduzir o veículo
+  podeConduzir(veiculo: Veiculo): boolean {
+    if (!this.cnhValida()) return false;
+
+    const categoriaNecessaria = veiculo.getCategoriaMinimaCNH();
+    return this.categoriaCNH >= categoriaNecessaria;
   }
   cnhValida(): boolean {
     // Verifica se a CNH do motorista está vencida
@@ -36,6 +33,11 @@ export class Motorista {
       throw new Error('Dados da viagem inválidos.');
     }
   }
+
+  getNome(): string {
+    return this.nome;
+  }
+
   getHistoricoViagens(): string[] {
     // Retorna o histórico de viagens do motorista
     return this.historicoViagens;

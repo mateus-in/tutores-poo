@@ -1,24 +1,30 @@
-import { Veiculos } from './veiculo';
-import { StatusVeiculos } from './enum';
+import { Veiculo } from './veiculo';
+import { StatusVeiculos, CategoriaCNH } from './enum';
 
-export class Van extends Veiculos {
+export class Van extends Veiculo {
+  //IMPLEMENTAR TIPO CNH CATEGORIA D
+
+  private numeroAssentos: number;
+
   constructor(
-    public placa: string,
-    public modelo: string,
-    public quilometragem: number,
-    public status: StatusVeiculos,
-    public custoManutenção: number,
-    public numeroAssentos: number, // Atributo adicional
+    placa: string,
+    modelo: string,
+    ano: number,
+    quilometragem: number = 0,
+    custoManutencao: number = 0,
+    numeroAssentos: number = 12,
   ) {
-    super(placa, modelo, quilometragem, status, custoManutenção);
+    super(placa, modelo, ano, quilometragem, custoManutencao);
+    this.numeroAssentos = numeroAssentos;
   }
-  CalcularCustoPorKM(): number {
-    // Verifica se a quilometragem é zero para evitar divisão por zero
-    if (this.quilometragem === 0) {
-      throw new Error('Quilometragem não pode ser zero para calcular o custo por KM.');
-    }
 
-    // Calcula e retorna o custo por quilômetro
-    return this.custoManutenção / this.quilometragem;
+  getCategoriaMinimaCNH(): CategoriaCNH {
+    return CategoriaCNH.D;
+  }
+
+  calcularCustoPorKm(): number {
+    const base = 0.6;
+    const adicionalPorAssento = 0.05;
+    return base + this.numeroAssentos * adicionalPorAssento;
   }
 }

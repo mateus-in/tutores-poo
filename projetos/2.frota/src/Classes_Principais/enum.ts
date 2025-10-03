@@ -19,10 +19,10 @@ export enum TipoManutencao {
   Revisao = 'Revisão',
 }
 
-export enum CategoriaCNH{
-  A = 'A',
-  B = 'B',
-  C = 'C',
-  D = 'D',
-  E = 'E',
+export enum CategoriaCNH {
+  A = 1,
+  B = 2,
+  C = 3,
+  D = 4,
+  E = 5,
 }
