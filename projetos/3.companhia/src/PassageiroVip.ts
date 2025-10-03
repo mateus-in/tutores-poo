@@ -14,8 +14,10 @@ export class PassageiroVip extends Passageiro {
     super(id, nome, documento, email, telefone);
   }
 
-  beneficios(): string {
-    return 'Acesso a sala VIP, Embarque prioritário, Maior franquia de bagagem';
+  listarbeneficios(): string[]{
+    return ["Acessso a sala VIP",
+             "Desconto especial",
+            "Maior quantidade de bagagens despachada", ];
   }
 
   calcularPrecoPassagem(precoBase: number): number {
