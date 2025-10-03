@@ -13,9 +13,9 @@ import { SalaoDeBeleza } from './SalaoDeBeleza';
 const promocao1 = new Promocao(
   'Promo Verão',
   10,
-    new Date('2025-09-01'),
-    new Date('2025-09-30'),
-    ['hidratacao1'], // Serviços aplicáveis à promoção
+  new Date('2025-10-01'),
+  new Date('2025-10-30'),
+  ['hidratacao1'], // Serviços aplicáveis à promoção
 );
 console.log(promocao1.estaAtiva());
 console.log(promocao1.calcularDesconto(10));
@@ -47,9 +47,15 @@ console.log(produto1.quantidadeEstoque); // 50 (não mudou, pois o método consu
 // Repondo o estoque
 produto1.quantidadeEstoque += 20; // Adiciona 20 unidades ao estoque
 console.log(produto1.quantidadeEstoque); // 70
-console.log(produto1.precisaReposicao()); // false (não precisa mais de reposição) 
+console.log(produto1.precisaReposicao()); // false (não precisa mais de reposição)
 
-const cliente = new Cliente ('1', 'Batatinha', '3732611234','batatinha@gmail.com', new FichaTecnica ([], '', []));
+const cliente = new Cliente(
+  '1',
+  'Batatinha',
+  '3732611234',
+  'batatinha@gmail.com',
+  new FichaTecnica([], '', []),
+);
 console.log(cliente);
 
 cliente.fichaTecnica.alergias.push('Acetona');

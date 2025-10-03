@@ -10,10 +10,7 @@ export class Promocao {
   ) {}
   estaAtiva(): boolean {
     const hoje = new Date();
-    if (hoje >= this.dataInicio && hoje <= this.dataFim) {
-      return true;
-    }
-    return false;
+    return hoje >= this.dataInicio && hoje <= this.dataFim;
   }
 
   aplicavelAoServico(servico: Servico): boolean {
