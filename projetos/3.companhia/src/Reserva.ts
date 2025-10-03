@@ -24,8 +24,26 @@ export class Reserva {
     return this.precoTotal
   } 
   adicionarBagagem(bagagem: Bagagem): boolean {
-    return true;
+  
+    this.bagagens.push(bagagem);
+
+    if (this.passageiro.validarBagagem(this.bagagens)) {
+        this.calcularPrecoTotal();
+        return true;
+    }
+    this.bagagens.pop();
+    return false;
+}
+  
+  confirmarReserva(): void {
+       if (this.status === StatusReserva.PENDENTE) {
+        this.status = StatusReserva.CONFIRMADA;
+        this.calcularPrecoTotal(); // garante preço final atualizado
+    }
   }
-  confirmarReserva(): void {}
-  cancelar(): void {}
+  cancelar(): void {
+    if (this.status !== StatusReserva.CANCELADA) {
+        this.status = StatusReserva.CANCELADA;
+    } 
+  }
 }
