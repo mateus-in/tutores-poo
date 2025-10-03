@@ -6,6 +6,6 @@ export class Cliente {
     public nome: string,
     public telefone: string,
     public email: string,
-    public fichaTecnica: FichaTecnica,
+    public fichaTecnica: FichaTecnica
   ) {}
 }

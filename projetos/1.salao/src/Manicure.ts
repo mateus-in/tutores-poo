@@ -10,7 +10,7 @@ export class Manicure implements Servico {
     public pedicure?: number
   ) {}
 
-  calcularAdicionalPedicure(): number {
+  private calcularAdicionalPedicure(): number {
     if (this.pedicure) {
       return this.precoBase + this.pedicure;
     }

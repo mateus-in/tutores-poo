@@ -89,12 +89,12 @@ Equipe: Carine, Gabriel Fernatti, Julimar, Maria Gabriely, Wendel
 ---        
 *Agendamento*
 - [X] Classe
-- [ ] Método calcularDuracaoTotal
-- [ ] Método ValorTotal
-- [ ] Método adicionarServico
+- [X] Método calcularDuracaoTotal
+- [X] Método ValorTotal
+- [X] Método adicionarServico
       
 - Regras de negócio Agendamento:
-  - [ ] Um profissional não pode ter dois agendamentos simultâneos. Validações importantes: verificar disponibilidade do profissional antes de agendar.
+  - [ ] Um profissional não pode ter dois agendamentos simultâneos. Validações importantes: verificar disponibilidade do profissional antes de agendar. //*adicionado na classe SalaoDeBeleza - consultarDisponibilidade
   - [ ] Agendamentos só podem ser feitos durante o horário de funcionamento. Validações importantes: validar se o horário está dentro do funcionamento do salão.
   - [ ] Cliente deve estar cadastrado antes de agendar. Validações importantes: validar dados obrigatórios (nome, telefone, etc).
   - [ ] Profissional deve ter a especialidade necessária para o serviço
@@ -105,12 +105,12 @@ Equipe: Carine, Gabriel Fernatti, Julimar, Maria Gabriely, Wendel
   - [ ] AgendamentoInvalidoException: Conflito de horários ou profissional sem especialidade
   - [ ] ClienteNaoCadastradoException: Tentativa de agendar para cliente inexistente
 ---           
-- [ ] Salão de Beleza (classe principal)
-  - [ ] Método cadastrarCliente
-  - [ ] Método agendarServico
-  - [ ] Método finalizarAtendimento
-  - [ ] Método cancelarAgendamento
-  - [ ] Método consultarDisponibilidade
+- [X] Salão de Beleza (classe principal)
+  - [X] Método cadastrarCliente
+  - [X] Método agendarServico
+  - [X] Método finalizarAtendimento
+  - [X] Método cancelarAgendamento
+  - [X] Método consultarDisponibilidade
 ---     
 # Classes de apoio:
 

@@ -2,11 +2,11 @@ import { Servico } from './Servico';
 import { Promocao } from './Promocao';
 export class Corte implements Servico {
   constructor(
-    public promocao: Promocao,
     public nome: string,
     public precoBase: number,
     public duracaoMinutos: number,
     //reitrado tipoProduto: string
+    public promocao: Promocao
   ) {}
 
   calcularPrecoFinal(): number {

@@ -1,4 +1,5 @@
 import { Agendamento } from './Agendamento';
+import { Servico } from './Servico';
 
 export class Profissional {
   constructor(
@@ -6,22 +7,30 @@ export class Profissional {
     public id: string,
     public nome: string,
     public especialidades: string[],
-    public agenda: Agendamento,
+    public agenda: Agendamento []=[] //agora é um array de agendamentos
   ) {}
 
   temEspecialidades(servico: string): boolean {
-    if (this.especialidades.length === 0 || !this.especialidades.includes(servico)){
-       return false;      
+    return this.especialidades.includes(servico); 
     }
-
-    return this.especialidades.includes(servico);
-  }
-
+  
   estaDisponivel(data: Date, duracao: number): boolean {
-    if (duracao <= 0 || this.agenda.dataHora === data || this.agenda.dataHora.getTime() + duracao*60000 > data.getTime()){
-       return false;      
+   if (duracao <= 0) return false;
+
+    const inicioNovo = data.getTime();
+    const fimNovo = inicioNovo + duracao * 60000;
+
+    for (const ag of this.agenda) {
+      const inicioExistente = ag.dataHora.getTime();
+      const fimExistente = inicioExistente + ag.calcularDuracaoTotal() * 60000;
+
+      // Se houver sobreposição de horários
+      if (inicioNovo < fimExistente && fimNovo > inicioExistente) {
+        return false;
+      }
     }
-     return true;
+
+    return true;
   }
 }
 
