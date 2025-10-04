@@ -4,10 +4,10 @@ export class Manicure implements Servico {
   constructor(
     public nome: string,
     public precoBase: number,
-    public duracaoMinutos: number,
+    public duracaoMinutos: number = 45,
     public promocao?: Promocao,
     //retirado tipoProduto: string
-    public pedicure?: number
+    public pedicure?: number,
   ) {}
 
   private calcularAdicionalPedicure(): number {
@@ -17,7 +17,7 @@ export class Manicure implements Servico {
     return this.precoBase;
   }
 
-calcularPrecoFinal(): number {
+  calcularPrecoFinal(): number {
     let preco = this.calcularAdicionalPedicure();
 
     if (this.promocao) {

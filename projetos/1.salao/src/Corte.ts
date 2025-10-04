@@ -4,9 +4,9 @@ export class Corte implements Servico {
   constructor(
     public nome: string,
     public precoBase: number,
-    public duracaoMinutos: number,
+    public duracaoMinutos: number = 60,
     //reitrado tipoProduto: string
-    public promocao: Promocao
+    public promocao: Promocao,
   ) {}
 
   calcularPrecoFinal(): number {
