@@ -88,4 +88,6 @@ console.log(
     .calcularPrecoPassagem(600)
     .toFixed(2)}`,
 ); // R$ 600.00
+
 //teste passageiroVip
+const passageiro4 = new PassageiroVip('3', 'Carlos Pereira', '55566677788', '', '', '');
