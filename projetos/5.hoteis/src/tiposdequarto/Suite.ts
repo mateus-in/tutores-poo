@@ -1,10 +1,11 @@
 import { StatusQuarto } from '../Enums/enumStatusQuarto';
 import { Quarto } from './Quarto';
-export class suite extends Quarto {
+
+export class Suite extends Quarto {
   private _sala: boolean;
   private _varanda: boolean;
   constructor(
-    numero: string,
+    numero: number,
     andar: number,
     capacidade: number,
     precoDiaria: number,
@@ -26,13 +27,17 @@ export class suite extends Quarto {
     const base = this.precoDiaria * dias;
     return base;
   }
-  public alterarStatus(novoStatus: StatusQuarto): void {
-    throw new Error('Method not implemented.');
-  }
   public estaDisponivel(): boolean {
-    throw new Error('Method not implemented.');
+    if (this.status === StatusQuarto.DISPONIVEL) {
+      return true;
+    } else {
+      return false;
+    }
   }
   public obterDescricao(): string {
-    throw new Error('Method not implemented.');
+    const descricaoBase = super.obterDescricao();
+    const descricaoVaranda = this.varanda ? 'com varanda' : 'sem varanda';
+    const descricaoSala = this.sala ? 'com sala de estar' : 'sem sala de estar';
+    return `${descricaoBase} Tipo: Suite — ${descricaoVaranda}, ${descricaoSala}.`;
   }
 }

@@ -1,15 +1,15 @@
 import { StatusQuarto } from '../Enums/enumStatusQuarto';
 
 export abstract class Quarto {
-  protected numero: string;
-  protected andar: number;
-  protected capacidade: number;
-  protected precoDiaria: number;
-  protected status: StatusQuarto;
-  protected comodidades: string[];
+  public numero: number;
+  public andar: number;
+  public capacidade: number;
+  public precoDiaria: number;
+  public status: StatusQuarto;
+  public comodidades: string[];
 
   constructor(
-    numero: string,
+    numero: number,
     andar: number,
     capacidade: number,
     precoDiaria: number,
@@ -25,11 +25,21 @@ export abstract class Quarto {
 
   public abstract calcularCustoTotal(dias: number): number;
 
-  alterarStatus(novoStatus: StatusQuarto): void {
+  public alterarStatus(novoStatus: StatusQuarto): void {
     this.status = novoStatus;
   }
 
-  public abstract estaDisponivel(): boolean;
+  public estaDisponivel(): boolean {
+    return this.status === StatusQuarto.DISPONIVEL;
+  }
 
-  public abstract obterDescricao(): string;
+  public obterDescricao(): string {
+    const listaComodidades = this.comodidades.length > 0 ? this.comodidades.join(', ') : 'Nenhuma';
+
+    return `Quarto ${this.numero} (andar ${this.andar}) — capacidade: ${
+      this.capacidade
+    } pessoa(s), diária: R$${this.precoDiaria.toFixed(2)}. Status: ${
+      this.status
+    }. Comodidades: ${listaComodidades}.`;
+  }
 }
