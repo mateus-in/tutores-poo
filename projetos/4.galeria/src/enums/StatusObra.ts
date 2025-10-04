@@ -1,0 +1,9 @@
+export enum StatusObra {
+  EM_ACERVO,
+  EM_EXPOSICAO,
+  VENDIDA,
+  EMPRESTADA,
+  EM_RESTAURACAO,
+  Disponivel,
+}
+
