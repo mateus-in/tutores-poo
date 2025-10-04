@@ -3,7 +3,7 @@ import { Voo} from "./Voo";
 import { Passageiro} from "./Passageiro";
 import { Reserva } from "./Reserva";
 import { StatusReserva } from "./enums/StatusReserva";
-class CompanhiaAerea {
+ export class CompanhiaAerea {
 
   nome: string;
   voos: Voo[];

@@ -2,7 +2,7 @@ import { Bagagem } from './Bagagem';
 import { Passageiro } from './Passageiro';
 import { TipoBagagem } from './enums/TipoBagagem';
 
-export class PassageiroVip extends Passageiro {
+export class PassageiroCrianca extends Passageiro {
   constructor(
     public id: string,
     public nome: string,
