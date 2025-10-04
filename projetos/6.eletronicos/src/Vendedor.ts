@@ -28,6 +28,7 @@ export class Vendedor {
 
   adicionarVenda(pedido: Pedido): void {
     this.vendasMes.push(pedido);
+    
   }
 
   atingiuMeta(): boolean {
