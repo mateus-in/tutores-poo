@@ -35,4 +35,10 @@ export class Agendamento {
     }
     this.servicos.push(servico);
   }
+  somarDuracaoServicos(): number {
+    return this.servicos.reduce((total, servico) => total + servico.duracaoMinutos, 0);
+  }
+  DuracaoAgendamento(): Date {
+    return new Date(this.dataHora.getTime() + this.somarDuracaoServicos() * 60000);
+  }
 }
