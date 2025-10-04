@@ -35,5 +35,36 @@ console.log(passageiro1.validarBagagem(bagagensIncorretas)); // false
 const bagagem5 = new Bagagem("b5", TipoBagagem.BAGAGEM_ESPECIAL, 35, "80cmx50cm",0);
 const bagagensIncorretas2 = [ bagagem5];
 console.log(passageiro1.validarBagagem(bagagensIncorretas2)); // false
+//teste passageiro crianca 
+const passageiro2 = new PassageiroCrianca("2","Maria Silva","98765432100"," @email.com", "11 99876-54321",8,"João Silva");
+console.log(`Preço da passagem para passageiro criança: R$ ${passageiro2.calcularPrecoPassagem(500).toFixed(2)}`); // R$ 250.00
+//bagagem correta
+const bagagem6 = new Bagagem("b6", TipoBagagem.BAGAGEM_MAO, 8, "50cmx20cm",0);
+const bagagem7 = new Bagagem("b7", TipoBagagem.BAGAGEM_DESPACHADA, 20, "70cmx40cm",0);
+const bagagensCrianca = [bagagem6, bagagem7];
+console.log(passageiro2.validarBagagem(bagagensCrianca)); // true
+//bagagem incorreta
+const bagagem8 = new Bagagem("b8", TipoBagagem.BAGAGEM_MAO, 8, "50cmx20cm",0);
+const bagagem9 = new Bagagem("b9", TipoBagagem.BAGAGEM_MAO, 10, "55cmx25cm",0);
+const bagagensCriancaIncorreta = [bagagem8, bagagem9];
+console.log(passageiro2.validarBagagem(bagagensCriancaIncorreta)); // false
+const bagagem10 = new Bagagem("b10", TipoBagagem.BAGAGEM_ESPECIAL, 35, "80cmx50cm",0);
+const bagagensCriancaIncorreta2 = [ bagagem10];
+console.log(passageiro2.validarBagagem(bagagensCriancaIncorreta2)); // false
+//teste passageiro vip
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
