@@ -33,9 +33,23 @@ listarexclusividadessalavip():string[]{
 
 
   calcularPrecoPassagem(precoBase: number): number {
-        return precoBase * 0.8;
+        return precoBase * 0.9; // 10% de desconto
+        
   }
   validarBagagem(bagagens: Bagagem[]): boolean {
+     const pesovalido= bagagens.every(Bagagem => {
+      switch (Bagagem.tipo) {
+        case TipoBagagem.BAGAGEM_MAO:
+          return Bagagem.peso <= 10;
+        case TipoBagagem.BAGAGEM_DESPACHADA:
+          return Bagagem.peso <= 32;
+        default: 
+          return true;
+      }
+    });
+    if (!pesovalido) {
+      return false;
+    }
      const contarBagagens = (tipo: TipoBagagem) => 
                     bagagens.filter(b => b.tipo === tipo).length;
                   
@@ -43,11 +57,11 @@ listarexclusividadessalavip():string[]{
                 const contagemDespachada = contarBagagens(TipoBagagem.BAGAGEM_DESPACHADA);
                 const contagemEspecial = contarBagagens(TipoBagagem.BAGAGEM_ESPECIAL);
         
-                      if (contagemMao> 1 ) {
+                      if (contagemMao!== 1 ) {
                         return false; 
-                      } else if (contagemDespachada > 2) {
+                      } else if (contagemDespachada !== 2) {
                         return false;
-                      }else if (contagemEspecial > 1){
+                      }else if (contagemEspecial !== 1){
                         return  false ;
                       } else {
                         return true;

@@ -2,6 +2,7 @@ import { StatusAssento } from './enums/StatusAssento';
 import { Aeronave } from './Aeronave';
 import { Reserva } from './Reserva';
 import { StatusReserva } from './enums/StatusReserva';
+import { StatusAeronave } from './enums/StatusAeronave';
 
 export class Voo {
   constructor(
@@ -15,6 +16,12 @@ export class Voo {
     public assentos: Map<string, StatusAssento>,
     public reservas: Reserva[],
   ) {}
+    decolarvoo(  ):boolean{
+      if (this.aeronave.status === StatusAeronave.DISPONIVEL) {
+        return true;
+      }
+      return false;
+    }
 
   verificarDisponibilidade(): number {
      let DISPONIVEL = 0;

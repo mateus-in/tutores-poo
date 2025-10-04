@@ -37,6 +37,7 @@ const bagagensIncorretas2 = [ bagagem5];
 console.log(passageiro1.validarBagagem(bagagensIncorretas2)); // false
 //teste passageiro crianca 
 const passageiro2 = new PassageiroCrianca("2","Maria Silva","98765432100"," @email.com", "11 99876-54321",8,"João Silva");
+//EU FIZ UMA MODIFICAÇÃO AQUI NO CÓDIGO DA CLASSE PASSAGEIRO CRIANÇA,DEVE RETORNAR METADE DO PREÇOPARA CRIANÇAS COM MENOS DE 12 ANOS ,O RESTO TEM QUE RETRORNAR O PREÇO CHEIO
 console.log(`Preço da passagem para passageiro criança: R$ ${passageiro2.calcularPrecoPassagem(500).toFixed(2)}`); // R$ 250.00
 //bagagem correta
 const bagagem6 = new Bagagem("b6", TipoBagagem.BAGAGEM_MAO, 8, "50cmx20cm",0);
@@ -51,11 +52,9 @@ console.log(passageiro2.validarBagagem(bagagensCriancaIncorreta)); // false
 const bagagem10 = new Bagagem("b10", TipoBagagem.BAGAGEM_ESPECIAL, 35, "80cmx50cm",0);
 const bagagensCriancaIncorreta2 = [ bagagem10];
 console.log(passageiro2.validarBagagem(bagagensCriancaIncorreta2)); // false
-//teste passageiro vip
-
-
-
-
+const  passageiro3 = new PassageiroCrianca("13","Ana Souza","11223344556","ana.souza@email.com", "11 91234-56789",10,"Maria Souza");
+console.log(`Preço da passagem para passageiro criança: R$ ${passageiro3.calcularPrecoPassagem(600).toFixed(2)}`); // R$ 600.00
+//teste passageiroVip  
 
 
 

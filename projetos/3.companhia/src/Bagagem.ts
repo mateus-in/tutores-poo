@@ -1,4 +1,4 @@
-import { threadId } from 'worker_threads';
+
 import { TipoBagagem } from './enums/TipoBagagem';
 export class Bagagem {
   constructor(
@@ -8,7 +8,7 @@ export class Bagagem {
     public dimensoes: string, // 50 cm x 20 cm
     public precoExtra:number,
   ) {}
-
+//eu tive dificulade pra passar o teste  calcularTaxaExcesso,para cada passageiro se a funcao nao der certo apagar ou modificar
   calcularTaxaExcesso(): number {
     let limitePeso = 0;
     if (this.tipo===TipoBagagem.BAGAGEM_MAO) {
