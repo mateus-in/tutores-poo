@@ -11,54 +11,56 @@ export class SalaoDeBeleza {
     private nome: string,
     private clientes: Cliente[],
     private profissionais: Profissional[],
-    private agendamentos: Agendamento[],
+    public agendamentos: Agendamento[],
     private produtos: Produto[],
     private horariosFuncionamento: HorarioFuncionamento[],
   ) {}
 
   cadastrarCliente(cliente: Cliente): void {
-    if (this.clientes.find((Cliente) => Cliente.id === cliente.id)) {
+    if (this.clientes.find((c) => c.id === cliente.id)) {
       throw new Error('Cliente com este ID já existe.');
     }
     this.clientes.push(cliente);
   }
 
   agendarServico(agendamento: Agendamento, cliente: Cliente, profissional: Profissional): boolean {
-    if (!this.profissionais.find((Profissional) => Profissional.id === profissional.id)) {
+    if (!this.profissionais.some((p) => p.id === profissional.id)) {
       throw new Error('Profissional não cadastrado.');
     }
     if (!profissional.temEspecialidades(agendamento.servicos[0].nome)) {
       throw new Error('Profissional não possui a especialidade para este serviço.');
     }
-    if (this.clientes.find((Cliente) => Cliente.id === cliente.id) === undefined) {
+    if (!this.clientes.some((c) => c.id === cliente.id)) {
       throw new Error('Cliente não cadastrado.');
     }
-    if (this.agendamentos.find((Agendamento) => Agendamento.id === agendamento.id)) {
+    if (this.agendamentos.some((Agendamento) => Agendamento.id === agendamento.id)) {
       throw new Error('Ja existe um agendamento com este ID.');
     }
-    const existeAgendamentoMesmoHorario = this.agendamentos.some(
-      (Agendamento) =>
-        Agendamento.profissional.id === agendamento.profissional.id &&
-        Agendamento.dataHora.getTime() === agendamento.dataHora.getTime(),
-    );
-    if (existeAgendamentoMesmoHorario) {
-      throw new Error('Já existe um Agendamento para esse horário.');
+    const novoComeco = agendamento.dataHora;
+    const novoFim = agendamento.DuracaoAgendamento();
+    const conflitos = this.agendamentos.some((a) => {
+      a.profissional.id === profissional.id &&
+        novoComeco < a.DuracaoAgendamento() &&
+        novoFim > a.dataHora;
+    });
+    if (conflitos) {
+      throw new Error('Conflito de horário com outro agendamento.');
     }
     this.agendamentos.push(agendamento);
     return true;
   }
 
   finalizarAtendimento(agendamento: Agendamento): void {
-    if (!this.agendamentos.find((Agendamento) => Agendamento.id === agendamento.id)) {
+    if (!this.agendamentos.find((a) => a.id === a.id)) {
       throw new Error('Agendamento não encontrado.');
     }
     agendamento.status = StatusPagamento.APROVADO;
   }
   cancelarAgendamento(id: string): boolean {
-    if (!this.agendamentos.find((Agendamento) => Agendamento.id === id)) {
+    if (!this.agendamentos.find((a) => a.id === id)) {
       throw new Error('Agendamento não encontrado.');
     }
-    this.agendamentos = this.agendamentos.filter((Agendamento) => Agendamento.id !== id);
+    this.agendamentos = this.agendamentos.filter((a) => a.id !== id);
     return true;
   }
 
