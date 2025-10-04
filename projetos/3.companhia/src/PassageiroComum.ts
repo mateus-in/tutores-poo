@@ -16,42 +16,40 @@ export class PassageiroComum extends Passageiro {
   calcularPrecoPassagem(precoBase: number): number {
     return precoBase;
   }
+
   validarBagagem(bagagens: Bagagem[]): boolean {
-    const pesovalido= bagagens.every(Bagagem => {
-      switch (Bagagem.tipo) {
-        // trocar o sinal se der erro 
-        case TipoBagagem.BAGAGEM_MAO:
-          return Bagagem.peso <= 10;
-        case TipoBagagem.BAGAGEM_DESPACHADA:
-          return Bagagem.peso <= 23;
-        default: 
-          return true;
+    console.log(bagagens);
+
+    // declarar uma variável para controlar o retorno da função
+    let bagagemMaoValida = false;
+    let bagagemDespachadaValida = false;
+
+    bagagens.forEach((bagagem) => {
+      // procurar uma bagagem do tipo BAGAGEM_MAO
+      if (bagagem.tipo === TipoBagagem.BAGAGEM_MAO) {
+        // se encontrar, conferir se o peso dela é <= 10
+        if (bagagem.peso <= 10) {
+          // se for, atribuir true pra variavel dela
+          bagagemMaoValida = true;
+        } else {
+          // se não for, atribuir false pra variável dela
+          bagagemMaoValida = false;
+        }
+      }
+
+      // procurar uma bagagem do tipo BAGAGEM_DESPACHADA
+      if (bagagem.tipo === TipoBagagem.BAGAGEM_DESPACHADA) {
+        // se encontrar, conferir se o peso dela é <= 23
+        if (bagagem.peso <= 23) {
+          // se for, atribuir true pra variavel dela
+          bagagemDespachadaValida = true;
+        } else {
+          // se não for, atribuir false pra variável dela
+          bagagemDespachadaValida = false;
+        }
       }
     });
-    if (!pesovalido) {
-      return false;
-    }
-  
-        const contarBagagens = (tipo: TipoBagagem) => 
-            bagagens.filter(b => b.tipo === tipo).length;
-          
-        const contagemMao = contarBagagens(TipoBagagem.BAGAGEM_MAO);
-        const contagemDespachada = contarBagagens(TipoBagagem.BAGAGEM_DESPACHADA);
-        const contagemEspecial = contarBagagens(TipoBagagem.BAGAGEM_ESPECIAL);
 
-              if (contagemMao !==1) {
-                return false; 
-              } else if (contagemDespachada !==1) {
-                return false;
-              }else if (contagemEspecial !==0){
-                return  false ;
-              } else {
-                return true;
-              }
-                
-          
-  } 
-
+    return bagagemMaoValida && bagagemDespachadaValida;
+  }
 }
-
-
