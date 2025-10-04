@@ -2,46 +2,44 @@ import { Veiculo } from './veiculo';
 import { Motorista } from './Motorista';
 import { Viagem } from './viagem';
 import { StatusVeiculos, StatusViagem } from './enum';
+import { VeiculoIndisponivelException, CNHInvalidaException } from './excecoes';
 
 export class Frota {
-  private nome: string;
-  private veiculos: Veiculo[] = [];
-  private motoristas: Motorista[] = [];
-  private viagens: Viagem[] = [];
+  public nome: string;
+  public veiculos: Veiculo[] = [];
+  public motoristas: Motorista[] = [];
+  public viagens: Viagem[] = [];
 
   constructor(nome: string) {
     this.nome = nome;
   }
 
-  adicionarVeiculo(veiculo: Veiculo): void {
+  public adicionarVeiculo(veiculo: Veiculo): void {
     this.veiculos.push(veiculo);
   }
 
-  adicionarMotorista(motorista: Motorista): void {
+  public adicionarMotorista(motorista: Motorista): void {
     this.motoristas.push(motorista);
   }
 
-  alocarVeiculo(motorista: Motorista, veiculo: Veiculo): boolean {
+  public alocarVeiculo(motorista: Motorista, veiculo: Veiculo): boolean {
     if (veiculo.getStatus() !== StatusVeiculos.Disponivel) {
-      console.error('Veículo indisponível.');
-      return false;
+      throw new VeiculoIndisponivelException();
     }
 
-    if (!motorista.cnhValida()) {
-      console.error('CNH do motorista está vencida.');
-      return false;
+    if (!motorista.cnhValida() || !motorista.podeConduzir(veiculo)) {
+      throw new CNHInvalidaException();
     }
 
     if (!motorista.podeConduzir(veiculo)) {
-      console.error('Motorista não pode conduzir este tipo de veículo.');
-      return false;
+      throw new CNHInvalidaException();
     }
 
     veiculo.alterarStatus(StatusVeiculos.Em_Transito);
     return true;
   }
 
-  iniciarViagem(viagem: Viagem): boolean {
+  public iniciarViagem(viagem: Viagem): boolean {
     if (viagem.getStatus() !== StatusViagem.Planejada) {
       console.error('Viagem já foi iniciada ou finalizada.');
       return false;
@@ -52,7 +50,7 @@ export class Frota {
     return true;
   }
 
-  finalizarViagem(viagemId: string, dataFim: Date, kmFinal: number): void {
+  public finalizarViagem(viagemId: string, dataFim: Date, kmFinal: number): void {
     const viagem = this.viagens.find((v) => v['id'] === viagemId);
 
     if (!viagem) {
@@ -67,19 +65,28 @@ export class Frota {
     }
   }
 
-  consultarVeiculosDisponiveis(): Veiculo[] {
+  public consultarVeiculosDisponiveis(): Veiculo[] {
     return this.veiculos.filter((v) => v.getStatus() === StatusVeiculos.Disponivel);
   }
+  public buscarPorPlaca(placa: string): Veiculo | undefined {
+    return this.veiculos.find((v) => v.getPlaca() === placa);
+  }
 
-  listarViagens(): Viagem[] {
+  public listarViagens(): Viagem[] {
     return this.viagens;
   }
 
-  listarMotoristas(): Motorista[] {
+  public listarMotoristas(): Motorista[] {
     return this.motoristas;
   }
 
-  listarVeiculos(): Veiculo[] {
+  public listarVeiculos(): Veiculo[] {
     return this.veiculos;
+  }
+  public atualizarQuilometragem(placa: string, novaKm: number): void {
+    const veiculo = this.buscarPorPlaca(placa);
+    if (veiculo) {
+      veiculo.atualizarQuilometragem(novaKm);
+    }
   }
 }

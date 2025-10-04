@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "description": "PAra Trabalho",
   "main": "index.js",
-  "scripts": {
-    "test": "npm init"
+ "scripts": {
+    "build": "tsc app.ts dist/",
+    "start": "ts-node app.ts",
+    "dev": "node ./dist/app.js"
   },
   "repository": {
     "type": "git",

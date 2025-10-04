@@ -1,5 +1,6 @@
 //import enum status veiculos
 import { StatusVeiculos, CategoriaCNH } from './enum';
+import { Combustivel } from './combustivel';
 
 export abstract class Veiculo {
   public placa: string;
@@ -8,6 +9,9 @@ export abstract class Veiculo {
   public quilometragem: number;
   public status: StatusVeiculos;
   public custoManutencao: number;
+  public getCustoFixo(): number {
+    return this.custoManutencao;
+  }
 
   constructor(
     placa: string,
@@ -25,6 +29,10 @@ export abstract class Veiculo {
   }
 
   abstract calcularCustoPorKm(): number;
+
+  public getTipoCombustivel(): Combustivel | null {
+    return null; // Implementação padrão, pode ser sobrescrita em subclasses
+  }
 
   atualizarQuilometragem(km: number): void {
     if (km < this.quilometragem) {
@@ -51,7 +59,17 @@ export abstract class Veiculo {
     return this.status;
   }
 
-  getQuilometragem(): number {
+  /**
+   * Retorna a quilometragem atual do veículo.
+   * Garante que seja sempre um número válido e não-negativo.
+   * @returns {number} Quilometragem do veículo.
+   * @throws {Error} Se a quilometragem estiver inválida.
+   */
+  public getQuilometragem(): number {
+    if (this.quilometragem === undefined || this.quilometragem < 0) {
+      throw new Error('Quilometragem inválida: valor indefinido ou negativo.');
+    }
+
     return this.quilometragem;
   }
 

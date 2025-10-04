@@ -4,6 +4,7 @@ import { CategoriaCNH } from './enum';
 
 export class Motorista {
   constructor(
+    public id: string,
     public nome: string,
     public cpf: string,
     public categoriaCNH: CategoriaCNH, // Exemplo: 'B', 'C', 'D', etc.
@@ -36,6 +37,10 @@ export class Motorista {
 
   getNome(): string {
     return this.nome;
+  }
+
+  getId(): string {
+    return this.id;
   }
 
   getHistoricoViagens(): string[] {

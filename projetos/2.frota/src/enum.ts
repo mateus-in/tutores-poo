@@ -26,3 +26,19 @@ export enum CategoriaCNH {
   D = 4,
   E = 5,
 }
+
+export enum TipoCombustivel {
+  Gasolina = 'Gasolina',
+  Alcool = 'Álcool',
+  Diesel = 'Diesel',
+  Eletrico = 'Elétrico',
+  Hibrido = 'Híbrido',
+}
+
+export enum PrecoCombustivel {
+  Gasolina = 5.5,
+  Alcool = 4.0,
+  Diesel = 3.8,
+  Eletrico = 0.7,
+  Hibrido = 4.5,
+}

@@ -1,6 +1,7 @@
 import { StatusViagem, StatusVeiculos } from './enum';
 import { Motorista } from './Motorista';
 import { Veiculo } from './veiculo';
+import { ViagemInvalidaException } from './excecoes';
 
 export class Viagem {
   public id: string;
@@ -13,6 +14,7 @@ export class Viagem {
   public quilometragemInicial: number;
   public quilometragemFinal?: number;
   public status: StatusViagem;
+  public distanciaPercorrida?: number;
 
   constructor(
     id: string,
@@ -33,6 +35,20 @@ export class Viagem {
     this.status = StatusViagem.Planejada;
   }
 
+  getDataInicio(): Date {
+    return this.dataInicio;
+  }
+  getDataFim(): Date | undefined {
+    return this.dataFim;
+  }
+
+  getVeiculo(): Veiculo {
+    return this.veiculo;
+  }
+  getMotorista(): Motorista {
+    return this.motorista;
+  }
+
   iniciarViagem(): void {
     if (this.status !== StatusViagem.Planejada) {
       throw new Error('Viagem já foi iniciada ou não pode ser iniciada.');
@@ -42,12 +58,12 @@ export class Viagem {
   }
 
   finalizarViagem(dataFim: Date, kmFinal: number): void {
-    if (this.status !== StatusViagem.Em_Andamento) {
-      throw new Error('A viagem não está em andamento.');
+    if (kmFinal <= this.quilometragemInicial) {
+      throw new ViagemInvalidaException('Quilometragem final deve ser maior que a inicial.');
     }
 
-    if (kmFinal <= this.quilometragemInicial) {
-      throw new Error('Quilometragem final deve ser maior que a inicial.');
+    if (dataFim < this.dataInicio) {
+      throw new ViagemInvalidaException('Data final não pode ser anterior à data de início.');
     }
 
     this.dataFim = dataFim;
@@ -63,13 +79,13 @@ export class Viagem {
     if (this.quilometragemFinal === undefined) {
       throw new Error('Viagem ainda não foi finalizada.');
     }
-    return this.quilometragemFinal - this.quilometragemInicial;
+    return (this.quilometragemFinal - this.quilometragemInicial) / 100;
   }
 
   calcularCustoViagem(): number {
     const distancia = this.calcularDistanciaPercorrida();
     const custoPorKm = this.veiculo.calcularCustoPorKm();
-    return distancia * custoPorKm;
+    return distancia * custoPorKm + this.veiculo.getCustoFixo();
   }
 
   getStatus(): StatusViagem {

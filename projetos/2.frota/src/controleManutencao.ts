@@ -2,16 +2,28 @@ import { Veiculo } from './veiculo';
 import { Manutencao } from './manutencao';
 import { TipoManutencao } from './enum';
 import { StatusVeiculos } from './enum';
+import { ManutencaoObrigatoriaException } from './excecoes';
 
 export class ControleManutencao {
   private veiculos: Veiculo[];
   private manutencoes: Manutencao[];
   private intervaloPreventivaKm: number;
+  getUltimaKmManutencao(veiculo: Veiculo): number {
+    const ultimaManutencao = this.obterUltimaManutencao(veiculo);
+    return ultimaManutencao ? ultimaManutencao.getQuilometragem() : 0;
+  }
 
   constructor(veiculos: Veiculo[], intervaloPreventivaKm: number = 10000) {
     this.veiculos = veiculos;
     this.manutencoes = [];
     this.intervaloPreventivaKm = intervaloPreventivaKm;
+  }
+
+  verificarManutencaoObrigatoria(veiculo: Veiculo): void {
+    const kmDesdeUltima = veiculo.getQuilometragem() - this.getUltimaKmManutencao(veiculo);
+    if (kmDesdeUltima >= this.intervaloPreventivaKm) {
+      throw new ManutencaoObrigatoriaException();
+    }
   }
 
   verificarManutencoesPendentes(): Veiculo[] {
