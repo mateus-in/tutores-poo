@@ -27,4 +27,13 @@ const bagagens = [bagagem1, bagagem2];
 console.log(passageiro1.validarBagagem(bagagens)); // true
 console.log(`Preço da passagem para passageiro comum: R$ ${passageiro1.calcularPrecoPassagem(500).toFixed(2)}`); // R$ 500.00
 //bagagem incorreta
+const bagagem3 = new Bagagem("b3", TipoBagagem.BAGAGEM_MAO, 8, "50cmx20cm",0);
+const bagagem4 = new Bagagem("b4", TipoBagagem.BAGAGEM_MAO, 10, "55cmx25cm",0);
+//TESTAR DEPOIS COM A BAGAGEM DESPACHADA
+const bagagensIncorretas = [bagagem3, bagagem4,];
+console.log(passageiro1.validarBagagem(bagagensIncorretas)); // false
+const bagagem5 = new Bagagem("b5", TipoBagagem.BAGAGEM_ESPECIAL, 35, "80cmx50cm",0);
+const bagagensIncorretas2 = [ bagagem5];
+console.log(passageiro1.validarBagagem(bagagensIncorretas2)); // false
+
 
