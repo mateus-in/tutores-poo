@@ -14,60 +14,66 @@ export class Reserva {
     public bagagens: Bagagem[],
     public dataReserva: Date,
     public precoTotal: number,
-    public precoExtra:number,
+    public precoExtra: number,
   ) {}
 
   calcularPrecoTotal(): number {
-    let precobagagens=0;
+    let precobagagens = 0;
     //PASSAGEIRO VIP NAO PAGA BAGAGEM ESPECIAL
-        if (this.passageiro instanceof PassageiroVip && this.bagagens[0].tipo=== TipoBagagem.BAGAGEM_ESPECIAL) {
-      
-  }
-    for(const bagagem of this.bagagens){
-    precobagagens+-bagagem.precoExtra;
+    if (
+      this.passageiro instanceof PassageiroVip &&
+      this.bagagens[0].tipo === TipoBagagem.BAGAGEM_ESPECIAL
+    ) {
     }
-    this.precoTotal=this.voo.precoBase+precobagagens;
+    for (const bagagem of this.bagagens) {
+      precobagagens + -bagagem.precoExtra;
+    }
+    this.precoTotal = this.voo.precoBase + precobagagens;
     return this.precoTotal;
-}
+  }
   adicionarBagagem(bagagem: Bagagem): boolean {
-  
     this.bagagens.push(bagagem);
 
     if (this.passageiro.validarBagagem(this.bagagens)) {
-        this.calcularPrecoTotal();
-        return true;
+      this.calcularPrecoTotal();
+      return true;
     }
     this.bagagens.pop();
     return false;
-}  
-// Método para verificar se a reserva expirou (em 24 horas),DAS REGRAS DE NEGÓCIO
-verificarExpiracaodaReserva():void {
-    if (this.status !==StatusReserva.PENDENTE) {
-      return ;
-}
- const dataLimite = new Date(this.dataReserva.getTime());
+  }
+  // Método para verificar se a reserva expirou (em 24 horas),DAS REGRAS DE NEGÓCIO
+  verificarExpiracaodaReserva(): void {
+    if (this.status !== StatusReserva.PENDENTE) {
+      return;
+      console.log(`Reserva ${this.id} não está pendente, não pode expirar.`);
+    }
+    const dataLimite = new Date(this.dataReserva.getTime());
     dataLimite.setHours(dataLimite.getHours() + 24);
-       const dataAtual = new Date();
+    const dataAtual = new Date();
 
     if (dataAtual > dataLimite) {
       this.status = StatusReserva.CANCELADA;
-}
-}
-  
+      console.log(`Reserva ${this.id} expirada e cancelada.`);
+    }
+  }
+
   confirmarReserva(): void {
-       if (this.status === StatusReserva.PENDENTE) {
-        this.status = StatusReserva.CONFIRMADA;
-        this.calcularPrecoTotal(); // garante preço final atualizado
+    if (this.status === StatusReserva.PENDENTE) {
+      this.status = StatusReserva.CONFIRMADA;
+      this.calcularPrecoTotal(); // garante preço final atualizado
+      console.log(`Reserva ${this.id} confirmada.`);
     }
   }
   cancelar(): void {
     if (this.status !== StatusReserva.CANCELADA) {
-        this.status = StatusReserva.CANCELADA;
-    } 
+      this.status = StatusReserva.CANCELADA;
+      console.log(`Reserva ${this.id} cancelada.`);
+    }
   }
   realizarCheckIn(): void {
     if (this.status === StatusReserva.CONFIRMADA) {
       this.status = StatusReserva.CHECK_IN_REALIZADO;
+      console;
     }
   }
 }
