@@ -27,7 +27,7 @@ const passageiro1 = new PassageiroComum(
 );
 //bagagem correta
 const bagagem1 = new Bagagem('b1', TipoBagagem.BAGAGEM_MAO, 8, '50cmx20cm', 0);
-const bagagem2 = new Bagagem('b2', TipoBagagem.BAGAGEM_DESPACHADA, 25, '70cmx40cm', 0);
+const bagagem2 = new Bagagem('b2', TipoBagagem.BAGAGEM_DESPACHADA, 20, '70cmx40cm', 0);
 const bagagens = [bagagem1, bagagem2];
 
 console.log(passageiro1.validarBagagem(bagagens)); // true
@@ -62,7 +62,7 @@ console.log(
     .toFixed(2)}`,
 ); // R$ 250.00
 //bagagem correta
-const bagagem6 = new Bagagem('b6', TipoBagagem.BAGAGEM_MAO, 8, '50cmx20cm', 0);
+const bagagem6 = new Bagagem('b6', TipoBagagem.BAGAGEM_MAO, 4, '50cmx20cm', 0);
 const bagagem7 = new Bagagem('b7', TipoBagagem.BAGAGEM_DESPACHADA, 20, '70cmx40cm', 0);
 const bagagensCrianca = [bagagem6, bagagem7];
 console.log(passageiro2.validarBagagem(bagagensCrianca)); // true
@@ -87,7 +87,149 @@ console.log(
   `Preço da passagem para passageiro criança: R$ ${passageiro3
     .calcularPrecoPassagem(600)
     .toFixed(2)}`,
-); // R$ 600.00
+); // R$ 300.00
+
+//teste Aeronave
+const aeronave1 = new Aeronave('PR-ABC', 'Boeing 737', 20, StatusAeronave.DISPONIVEL);
+console.log(`Aeronave disponível: ${aeronave1.estarDisponivel()}`); // true
+aeronave1.alterarStatus(StatusAeronave.MANUTENCAO);
+console.log(`Aeronave disponível: ${aeronave1.estarDisponivel()}`); // false
+aeronave1.alterarStatus(StatusAeronave.INATIVA);
+//teste voo
+// Criar o mapa de assentos ANTES de criar o voo
+function criarAssentosVoo(): Map<string, StatusAssento> {
+  const mapa = new Map<string, StatusAssento>();
+  for (let i = 1; i <= 20; i++) {
+    mapa.set(i.toString(), StatusAssento.DISPONIVEL);
+  }
+  return mapa;
+}
+
+const voo1 = new Voo(
+  'Voo 101',
+  'São Paulo',
+  'Rio de Janeiro',
+  new Date('2023-10-01T08:00:00'),
+  new Date('2023-10-01T09:00:00'),
+  aeronave1,
+  300,
+  criarAssentosVoo(),
+  [],
+);
+//declarar voo como disponivel e nao disponivel
+console.log(`Voo pode decolar: ${voo1.decolarvoo()}`); // false
+aeronave1.alterarStatus(StatusAeronave.DISPONIVEL);
+console.log(`Voo pode decolar: ${voo1.decolarvoo()}`); // true
+console.log(`Voo disponível: ${voo1.verificarDisponibilidade()}`); // 20
+aeronave1.alterarStatus(StatusAeronave.INATIVA);
+console.log(`Voo pode decolar: ${voo1.decolarvoo()}`); // false
+//reservar asentos e listar assentos disponiveis
+aeronave1.alterarStatus(StatusAeronave.DISPONIVEL);
+// assentosVoo1 já foi criado e preenchido acima
+// Reservar assentos apenas via reservas
+// Após criar as reservas, reservar os assentos correspondentes
+// calcular receita total
+
+const reserva1 = new Reserva('R1', passageiro2, voo1, '1', StatusReserva.CONFIRMADA, [], new Date(), 250, 0);
+const reserva3 = new Reserva('R2', passageiro3, voo1, '2', StatusReserva.CONFIRMADA, [], new Date(), 300, 0);
+voo1.reservarAssento('1');
+voo1.reservarAssento('2');
+const reservas = [reserva1, reserva3];
+const receitaTotal = reservas.reduce((total, reserva) => total + reserva.precoTotal, 0);
+console.log(`Receita total: R$ ${receitaTotal.toFixed(2)}`); // R$ 550.00
+
+// teste relatorio de voos
+
+const voo3 = new Voo(
+  'Voo 203',
+  'São Paulo',
+  'Rio de Janeiro',
+  new Date('2023-10-02T08:00:00'),
+  new Date('2023-10-02T09:00:00'),
+  aeronave1,
+  300,
+  criarAssentosVoo(),
+  [],
+);
+voo3.reservarAssento('1');
+const voo4 = new Voo(
+  'Voo 204',
+  'São Paulo',
+  'Rio de Janeiro',
+  new Date('2023-10-02T08:00:00'),
+  new Date('2023-10-02T09:00:00'),
+  aeronave1,
+  300,
+  criarAssentosVoo(),
+  [],
+);
+voo4.reservarAssento('1');
+
+// Adicionando reservas confirmadas aos voos
+
+const reservaVoo1A = new Reserva('R1', passageiro2, voo1, '1', StatusReserva.CONFIRMADA, [], new Date(), 250, 0);
+const reservaVoo1B = new Reserva('R2', passageiro3, voo1, '2', StatusReserva.CONFIRMADA, [], new Date(), 300, 0);
+voo1.reservas.push(reservaVoo1A, reservaVoo1B);
+
+const reservaVoo3A = new Reserva('R3', passageiro1, voo3, '1', StatusReserva.CONFIRMADA, [], new Date(), 200, 0);
+voo3.reservarAssento('1');
+voo3.reservas.push(reservaVoo3A);
+
+const reservaVoo4A = new Reserva('R4', passageiro2, voo4, '1', StatusReserva.CONFIRMADA, [], new Date(), 180, 0);
+voo4.reservarAssento('1');
+voo4.reservas.push(reservaVoo4A);
+
+const relatario = new RelatarioVoos([voo1, voo3, voo4]);
+console.log(`Receita total dos voos: R$ ${relatario.calcularReceitaTotal().toFixed(2)}`); // R$ 930.00 (reservas adicionadas aos voos)
+// A taxa de ocupação so realizei um teste simples,pois depende do número de assentos e reservas
+console.log(`Taxa de ocupação dos voos: ${relatario.calcularTaxaOcupacao().toFixed(2)}%`); 
+const voosPopulares = relatario.listarVoosMaisPopulares();
+console.log('Voos mais populares (por número de reservas):');
+voosPopulares.forEach((voo, index) => {
+  console.log(` ${index + 1}. ${voo.numeroVoo} - ${voo.reservas.length} reservas`);
+}); // Voo 1 - 2 reservas
+
+//teste companhia aerea
+const companhiaAerea = new CompanhiaAerea('Companhia X');
+companhiaAerea.cadastrarVoo(voo1);
+//nao vai ter um tipo de  retorno especifico .
+companhiaAerea.buscarVoos('São Paulo', 'Rio de Janeiro', new Date('2023-10-01T08:00:00'));
+//fazer reserva
+const reservaCompanhia = new Reserva('R5', passageiro1, voo1, '3', StatusReserva.PENDENTE, [], new Date(), 300, 0);
+const sucessoReserva = companhiaAerea.fazerReserva(reservaCompanhia);
+console.log(`Reserva bem-sucedida: ${sucessoReserva}`); // true
+const reservaCompanhia2 = new Reserva('R6', passageiro1, voo4, '4', StatusReserva.PENDENTE, [], new Date(), 300, 0);
+const reservaInvalida = new Reserva('R6', passageiro1, new Voo('VooInexistente', 'A', 'B', new Date(), new Date(), aeronave1, 100, criarAssentosVoo(), []), '1', StatusReserva.PENDENTE, [], new Date(), 100, 0);
+const resultado1 = companhiaAerea.fazerReserva(reservaInvalida);
+console.log(`Reserva para voo inexistente: ${resultado1}`); // Deve imprimir: false
+// Supondo que todos os assentos do voo1 já estejam reservados:
+for (let i = 1; i <= 20; i++) {
+  voo1.reservarAssento(i.toString());
+}
+const reservaSemAssento = new Reserva('R7', passageiro2, voo1, '21', StatusReserva.CONFIRMADA, [], new Date(), 100, 0);
+const resultado2 = companhiaAerea.fazerReserva(reservaSemAssento);
+console.log(`Reserva sem assentos disponíveis: ${resultado2}`); // Deve imprimir: false
+
+if (resultado2) {
+  //realizar check-in
+  const checkInSucesso = companhiaAerea.realizarCheckIn('reservaCompanhia');
+  console.log(`Check-in bem-sucedido: ${checkInSucesso}`); // true
+  //testar check-in falha
+  reservaSemAssento.status = StatusReserva.PENDENTE;
+  const checkInFalhaStatus = companhiaAerea.realizarCheckIn('reservaCompanhia');
+  console.log(`Check-in bem-sucedido: ${checkInFalhaStatus}`); // false
+  const checkInFalha = companhiaAerea.realizarCheckIn('R999');
+  console.log(`Check-in bem-sucedido: ${checkInFalha}`); // false
+  //cancelar reserva
+  const cancelamentoSucesso = companhiaAerea.cancelarReserva('R5');
+  console.log(`Cancelamento bem-sucedido: ${cancelamentoSucesso}`); // true
+} //testar cancelamento falha
+const cancelamentoFalha = companhiaAerea.cancelarReserva('R999');
+console.log(`Cancelamento bem-sucedido: ${cancelamentoFalha}`); // false
+
+
+
+
 
 //teste passageiroVip
 const passageiro4 = new PassageiroVip(

@@ -20,7 +20,7 @@ export class RelatarioVoos {
         let totalReservados = 0;
 
         for (const voo of this.voos) {
-            totalAssentos += voo.assentos.size; // assumindo que assentos é um Map
+            totalAssentos += voo.assentos.size; 
             for (const status of voo.assentos.values()) {
                 if (status === StatusAssento.RESERVADO) {
                     totalReservados++;

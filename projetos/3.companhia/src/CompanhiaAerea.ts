@@ -21,6 +21,7 @@ import { StatusReserva } from "./enums/StatusReserva";
 
   cadastrarVoo(voo: Voo): void {
     this.voos.push(voo);
+    console.log(`Voo ${voo.numeroVoo} cadastrado com sucesso!`);
   }
 
   buscarVoos(origem: string, destino: string, data: Date): Voo[] {
