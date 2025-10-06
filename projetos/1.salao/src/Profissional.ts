@@ -6,11 +6,12 @@ export class Profissional {
    
     public id: string,
     public nome: string,
-    public especialidades: string[],
+    public cpf: string,
+    public especialidades: Servico[],
     public agenda: Agendamento []=[] //agora é um array de agendamentos
   ) {}
 
-  temEspecialidades(servico: string): boolean {
+  temEspecialidades(servico: Servico): boolean {
     return this.especialidades.includes(servico); 
     }
   

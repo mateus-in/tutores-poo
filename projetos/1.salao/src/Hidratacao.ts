@@ -1,5 +1,6 @@
 import { Servico } from './Servico';
 import { Promocao } from './Promocao';
+import { Produto } from './Produto';
 
 export class Hidratacao implements Servico {
   constructor(
@@ -7,6 +8,7 @@ export class Hidratacao implements Servico {
     public precoBase: number,
     public duracaoMinutos: number,
     public tipoProduto: string,
+    public produto: Produto[],
     public promocao?: Promocao, // Adiciona a promoção como um atributo opcional
   ) {
     //

@@ -13,15 +13,19 @@ import { SalaoDeBeleza } from './SalaoDeBeleza';
 const promocao1 = new Promocao(
   'Promo Verão',
   10,
+<<<<<<< HEAD
   new Date('2025-10-01'),
   new Date('2025-10-30'),
   ['hidratacao1'], // Serviços aplicáveis à promoção
+=======
+    new Date('2025-09-01'),
+    new Date('2025-09-30'),
+    [], // Serviços aplicáveis à promoção
+>>>>>>> 1b2bb8d (implementado mais funções em SalaoDeBelezal e ajustes)
 );
+console.log(promocao1);
 console.log(promocao1.estaAtiva());
 console.log(promocao1.calcularDesconto(10));
-
-const hidratacaoMechas = new Hidratacao('hidratacao1', 20, 60, 'premium', promocao1);
-console.log(hidratacaoMechas.calcularPrecoFinal());
 
 const corte = new Corte('corte1', 80, 45, promocao1);
 console.log(corte.calcularPrecoFinal());
@@ -30,6 +34,7 @@ const manicure = new Manicure('manicure1', 20, 30, promocao1, 20);
 console.log(manicure.calcularPrecoFinal());
 
 const produto1 = new Produto('1', 'Shampoo', 50, 25.5, 10);
+console.log(produto1);
 console.log(produto1.temEstoqueSuficiente(20)); // true
 console.log(produto1.consumir(25)); // true
 console.log(produto1.precisaReposicao()); // false
@@ -49,6 +54,7 @@ produto1.quantidadeEstoque += 20; // Adiciona 20 unidades ao estoque
 console.log(produto1.quantidadeEstoque); // 70
 console.log(produto1.precisaReposicao()); // false (não precisa mais de reposição)
 
+<<<<<<< HEAD
 const cliente = new Cliente(
   '1',
   'Batatinha',
@@ -63,4 +69,8 @@ cliente.fichaTecnica.observacoes = 'Cliente possui diabetes.';
 console.log(cliente);
 
 const salao = new SalaoDeBeleza('Beleza Pura', [], [], [], [produto1], []);
+=======
+const salao = new SalaoDeBeleza('Beleza Pura', [], [], [], [], [], [], []);
+>>>>>>> 1b2bb8d (implementado mais funções em SalaoDeBelezal e ajustes)
 console.log(salao);
+

@@ -16,15 +16,15 @@ export class RelatorioFinanceiro {
         return 0;
     }
 
-obterServicosMaisPopulares(): string[] {
-    return [];
-}
+    obterServicosMaisPopulares(): string[] {
+        return [];
+    }
 
-calcularTicketMedio(): number {
-    return 0;
-}
+    calcularTicketMedio(): number {
+        return 0;
+    }
 
-listarClientesFrequentes(): Cliente[] {
-    return [];
-}
+    listarClientesFrequentes(): Cliente[] {
+        return [];
+    }
 }
