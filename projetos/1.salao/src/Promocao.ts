@@ -17,8 +17,8 @@ export class Promocao {
     if (!this.estaAtiva()) {
       return false;
     }
-    return this.servicosAplicaveis.includes(servico);
-  }
+    return this.servicosAplicaveis.some(s => s.nome === servico.nome);
+  }  
 
   calcularDesconto(valor: number): number {
     if (!this.estaAtiva()) {

@@ -12,8 +12,8 @@ export class Profissional {
   ) {}
 
   temEspecialidades(servico: Servico): boolean {
-    return this.especialidades.includes(servico); 
-    }
+    return this.especialidades.some(s => s.nome === servico.nome);
+  }
   
   estaDisponivel(data: Date, duracao: number): boolean {
    if (duracao <= 0) return false;
@@ -26,9 +26,7 @@ export class Profissional {
       const fimExistente = inicioExistente + ag.calcularDuracaoTotal() * 60000;
 
       // Se houver sobreposição de horários
-      if (inicioNovo < fimExistente && fimNovo > inicioExistente) {
-        return false;
-      }
+      if (inicioNovo < fimExistente && fimNovo > inicioExistente) return false;
     }
 
     return true;

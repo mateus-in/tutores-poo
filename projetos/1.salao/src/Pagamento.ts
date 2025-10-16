@@ -7,7 +7,9 @@ export class Pagamento {
     public metodoPagamento: MetodoPagamento,
     public status: StatusPagamento,
     public dataProcessamento: Date,
+    public valorPago?: number,
   ) {}
+  
   processar(): boolean {
     if (this.status === StatusPagamento.APROVADO) {
       return true;

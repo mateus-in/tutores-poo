@@ -30,14 +30,8 @@ export class Hidratacao implements Servico {
   calcularPrecoFinal(): number {
     let preco = this.calcularPrecoProduto();
 
-    if (this.promocao) {
-      const estaAtiva = this.promocao.estaAtiva();
-      const aplicavel = this.promocao.aplicavelAoServico(this);
-
-      if (estaAtiva && aplicavel) {
-        const desconto = this.promocao.calcularDesconto(preco);
-        preco -= desconto;
-      }
+     if (this.promocao && this.promocao.estaAtiva() && this.promocao.aplicavelAoServico(this)) {
+      preco -= this.promocao.calcularDesconto(preco);
     }
 
     return preco;

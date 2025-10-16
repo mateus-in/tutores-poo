@@ -6,18 +6,16 @@ export class Corte implements Servico {
     public precoBase: number,
     public duracaoMinutos: number,
     //reitrado tipoProduto: string
-    public promocao: Promocao
+    public promocao?: Promocao
   ) {}
 
-  calcularPrecoFinal(): number {
-    const estaAtiva = this.promocao.estaAtiva();
-    const aplicavelAoServico = this.promocao.aplicavelAoServico(this);
-    const percentualDesconto = this.promocao.percentualDesconto;
-    const desconto = this.promocao.calcularDesconto(this.precoBase);
+calcularPrecoFinal(): number {
+    let preco = this.precoBase;
 
-    if (!estaAtiva && !aplicavelAoServico) {
-      return this.precoBase;
+    if (this.promocao && this.promocao.estaAtiva() && this.promocao.aplicavelAoServico(this)) {
+      preco -= this.promocao.calcularDesconto(preco);
     }
-    return this.precoBase - desconto;
+
+    return preco;
   }
 }

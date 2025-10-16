@@ -1,8 +1,8 @@
 import { Cliente } from './Cliente';
-import { MetodoPagamento } from './MetodoPagamento';
 import { Profissional } from './Profissional';
 import { Servico } from './Servico';
-import { StatusPagamento } from './StatusPagamento';
+import { StatusAgendamento } from './StatusAgendamento';
+import { Pagamento } from './Pagamento';
 
 export class Agendamento {
   constructor(
@@ -11,8 +11,8 @@ export class Agendamento {
     public profissional: Profissional,
     public servicos: Servico[],
     public dataHora: Date,
-    public status: StatusPagamento,
-    public pagamento: MetodoPagamento,
+    public status: StatusAgendamento,
+    public pagamento: Pagamento,
   ) {}
 
   calcularDuracaoTotal(): number {

@@ -7,6 +7,8 @@ import { MetodoPagamento } from './MetodoPagamento';
 import { StatusPagamento } from './StatusPagamento';
 import { Servico } from './Servico';
 import { Promocao } from './Promocao';
+import { Pagamento } from './Pagamento';
+import { StatusAgendamento } from './StatusAgendamento';
 
 export class SalaoDeBeleza {
   constructor(
@@ -46,6 +48,7 @@ export class SalaoDeBeleza {
     if (this.produtos.find((Produto) => Produto.nome === produto.nome)) {
       throw new Error('Produto com este nome já existe.');
     }
+    this.produtos.push(produto);
   }  
 
   cadastrarServico(servico: Servico): void {
@@ -59,36 +62,49 @@ export class SalaoDeBeleza {
     if (this.promocoes.find((Promocao) => Promocao.nome === promocao.nome)) {
       throw new Error('Promoção com este nome já existe.');
     }
-      this.promocoes.push(promocao);
+    this.promocoes.push(promocao);
   }
 
-  agendarServico(agendamento: Agendamento, cliente: Cliente, profissional: Profissional, produtos: Produto): boolean {
+  agendarServico(agendamento: Agendamento, cliente: Cliente, profissional: Profissional, produto: Produto, funcionamento: HorarioFuncionamento): boolean {
     if (!this.profissionais.find((Profissional) => Profissional.id === profissional.id)) {
       throw new Error('Profissional não cadastrado.');
     }
-    if ((!profissional.temEspecialidades(agendamento.servicos[0])) || (!profissional.estaDisponivel(agendamento.dataHora, agendamento.calcularDuracaoTotal()))) {//agendamento.servicos[0].nome apresentou erro no teste
-      throw new Error('Conflito de horários ou profissional sem especialidade');
+    if (!profissional.temEspecialidades(agendamento.servicos[0])) {//agendamento.servicos[0].nome apresentou erro no teste
+      throw new Error('Profissional não possui a especialidade para esse serviço.');
     }
-    if (!produtos.temEstoqueSuficiente(produtos.quantidadeEstoque)) {
-      throw new Error('Estoque insuficiente para realizar o serviço.');
-    } 
+    if (!profissional.estaDisponivel(agendamento.dataHora, agendamento.calcularDuracaoTotal())) {
+      throw new Error('Profissional indisponível na data e hora escolhidas.');
+    }
+    for (const produto of this.produtos){
+      if (!produto.temEstoqueSuficiente(produto.quantidadeEstoque)) {
+       throw new Error('Estoque insuficiente para realizar o serviço.');
+     } 
+     produto.consumir(1);
+    }
     if (this.clientes.find((Cliente) => Cliente.id === cliente.id) === undefined) {
       throw new Error('Cliente não cadastrado.');
     }
-    if (this.agendamentos.find((Agendamento) => Agendamento.id === agendamento.id)) {
-      throw new Error('Ja existe um agendamento com este ID.');
-    }
+    if (!funcionamento.estaAberto(agendamento.dataHora)) {
+      throw new Error('Salão fechado no horário escolhido.');
+    }  
     this.agendamentos.push(agendamento);
+    profissional.agenda.push(agendamento);
     return true;
   }
 
-  finalizarAtendimento(agendamento: Agendamento): void {
-    if (!this.agendamentos.find((Agendamento) => Agendamento.id === agendamento.id)) {
-      throw new Error('Agendamento não encontrado.');
+  finalizarAtendimento(agendamento: Agendamento, pagamento: Pagamento): void {
+    const ag = this.agendamentos.find(a => a.id === agendamento.id);
+    if (!ag) throw new Error('Agendamento não encontrado.');
+
+    // Processa pagamento antes de finalizar
+    if (!pagamento.processar()) {
+      throw new Error('Pagamento não aprovado. Atendimento não pode ser finalizado.');
     }
-    agendamento.status = StatusPagamento.APROVADO;
+
+    ag.status = StatusAgendamento.FINALIZADO;
+    pagamento.status = StatusPagamento.APROVADO;
   }
-  
+
   cancelarAgendamento(id: string): boolean {
     if (!this.agendamentos.find((Agendamento) => Agendamento.id === id)) {
       throw new Error('Agendamento não encontrado.');
@@ -107,6 +123,21 @@ export class SalaoDeBeleza {
     }
     agendamento.dataHora = novaData;
     return true;
+  }
+
+  consultarDisponibilidade(profissional: Profissional, data: Date): boolean {
+    if (this.horariosFuncionamento.length === 0) {
+      throw new Error('Horários de funcionamento não definidos.');
+    }
+    if (!this.profissionais.find((Profissional) => Profissional.id === profissional.id)) {
+      throw new Error('Profissional não encontrado.');
+    }
+    const agendamentosNoDia = this.agendamentos.filter(
+      (Agendamento) =>
+        Agendamento.profissional.id === profissional.id &&
+        Agendamento.dataHora.toDateString() === data.toDateString(),
+    );
+    return agendamentosNoDia.length === 0;
   }
 
   consultarAgenda(profissionalId: string, data: Date): Agendamento[] {

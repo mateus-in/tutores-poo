@@ -17,17 +17,11 @@ export class Manicure implements Servico {
     return this.precoBase;
   }
 
-calcularPrecoFinal(): number {
+  calcularPrecoFinal(): number {
     let preco = this.calcularAdicionalPedicure();
 
-    if (this.promocao) {
-      const estaAtiva = this.promocao.estaAtiva();
-      const aplicavel = this.promocao.aplicavelAoServico(this);
-
-      if (estaAtiva && aplicavel) {
-        const desconto = this.promocao.calcularDesconto(preco);
-        preco -= desconto;
-      }
+     if (this.promocao && this.promocao.estaAtiva() && this.promocao.aplicavelAoServico(this)) {
+      preco -= this.promocao.calcularDesconto(preco);
     }
 
     return preco;
