@@ -9,10 +9,10 @@ export class Aeronave {
   ) {}
 
   estarDisponivel(): boolean {
-    // verificar o return de acordo com o que se pede na atividade .
+    return this.status === StatusAeronave.DISPONIVEL;
+    }
 
-    return true;
+  alterarStatus(novoStatus: StatusAeronave): void {
+    this.status = novoStatus;
   }
-
-  alternarStatus(novoStatus: StatusAeronave): void {}
 }

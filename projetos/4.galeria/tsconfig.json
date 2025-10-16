@@ -1,9 +1,9 @@
 {
-  "$schema": "https://json.schemastore.org/tsconfig",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/tsconfig.json",
   "_version": "20.1.0",
 
   "compilerOptions": {
-    "lib": ["es2023"],
+    "lib": ["es2023","dom"],
     "module": "node16",
     "target": "es2022",
     "outDir": "dist",

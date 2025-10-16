@@ -1,1 +1,0 @@
-import { Funcionario } from "./Funcionario";
